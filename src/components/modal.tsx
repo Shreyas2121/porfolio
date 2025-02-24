@@ -1,5 +1,4 @@
 "use client";
-
 import { useModal } from "@/store/modal";
 import React, { useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5"; // Import close icon
@@ -38,19 +37,33 @@ const Modal = ({ onClickOutsideClose = true }: Props) => {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      {" "}
-      {/* Overlay */}
+    <div
+      className="fixed inset-0 z-[99] flex items-center justify-center bg-black bg-opacity-50"
+      ref={modalRef}
+    >
+      {/* Modal Container */}
       <div
-        className="bg-white rounded-lg p-6 shadow-md relative"
-        ref={modalRef}
+        className="
+          relative
+          bg-white
+          rounded-lg
+          p-6
+          shadow-md
+          w-full
+          max-w-2xl
+          max-h-[80vh]
+          overflow-y-auto
+        "
       >
+        {/* Close Button */}
         <button
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
           onClick={closeContent}
         >
           <IoClose size={20} />
         </button>
+
+        {/* Modal Content */}
         <div>{content}</div>
       </div>
     </div>

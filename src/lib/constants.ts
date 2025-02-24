@@ -116,3 +116,102 @@ export const experiences = [
     ],
   },
 ];
+
+export interface Project {
+  title: string;
+  tagline: string;
+  description: string;
+  features: string[];
+  technologyStack: Record<string, string[]>;
+  challenges: string[];
+  demoLink?: string;
+  repository: string;
+  videoLink?: string;
+  futureImprovements: string[];
+}
+
+export const projects: Project[] = [
+  {
+    title: "Food Delivery Platform",
+    tagline:
+      "End-to-end food ordering with product customization, coupon integration, and secure Razorpay payments",
+    description:
+      "A comprehensive food ordering application designed to deliver a seamless food delivery experience. The platform enables users to browse a diverse menu, customize food items with add-on options, apply coupons, and complete orders through an integrated checkout flow. With support for both cash-on-delivery and online payments via Razorpay, the system also manages user profiles, addresses, and delivery zones, ensuring that only serviceable areas are accepted.",
+    features: [
+      "Product Browsing & Customization: Browse food items by category or menu, with robust customization options for add-ons.",
+      "Cart & Order Management: Create, update, and remove items from a cart that provides a clear order summary before checkout.",
+      "Secure Payment Integration: Process payments securely using Razorpay, supporting both online payments and cash-on-delivery.",
+      "User Profile & Address Management: Manage personal details and delivery addresses, with delivery zone validation to ensure serviceability.",
+      "Coupon & Discount Support: Apply discount coupons during checkout to offer dynamic pricing.",
+      "Responsive & Modern UI: Built with Tailwind CSS and Mantine components for a polished, mobile-friendly experience.",
+    ],
+    technologyStack: {
+      Frontend: [
+        "React",
+        "Tailwind CSS",
+        "Mantine",
+        "TanStack Query",
+        "Zustand",
+      ],
+      Backend: ["Node.js", "Express", "Drizzle ORM", "PostgreSQL"],
+      Payments: ["Razorpay"],
+      Utilities: [
+        "Zod (for schema validation)",
+        "asyncHandler (for error handling)",
+        "Git (for development and deployment)",
+      ],
+    },
+    challenges: [
+      "Implementing dynamic product customization and merging custom options with the base product.",
+      "Ensuring smooth checkout flows with Razorpay integration and handling various payment methods.",
+      "Managing state efficiently with TanStack Query and Zustand to provide real-time updates and caching.",
+      "Validating delivery zones based on pincode to ensure serviceability.",
+      "Designing a responsive, modern UI that works seamlessly across devices.",
+    ],
+    repository: "https://github.com/Shreyas2121/pizza-store",
+    futureImprovements: [
+      "Develop an admin panel for managing products, orders, and delivery zones.",
+      "Improve performance optimizations and state synchronization for large datasets.",
+    ],
+    videoLink: "https://www.youtube.com/embed/tRZb4OtL_Jc",
+  },
+
+  {
+    title: "Event Ticketing System",
+    tagline: "Streamlined event browsing, ticket purchasing, and management",
+    description:
+      "The Event Ticketing System is a web-based application designed to simplify the process of browsing, purchasing, and managing event tickets. Users can easily view available events, purchase tickets by providing their contact details, and retrieve their previously purchased tickets using their contact information. The system ensures fair access to tickets by enforcing purchase limits per user and generates unique QR codes for each ticket to facilitate secure entry at events.",
+    features: [
+      "Browse available events and purchase tickets via contact details",
+      "Retrieve previously purchased tickets using email/phone",
+      "Unique QR codes for secure entry",
+      "Purchase limits to prevent overbooking",
+      "OTP-based user verification (email/SMS)",
+      "Integration with Razorpay for secure payments",
+      "Cancel or manage events (admin functionality)",
+    ],
+    technologyStack: {
+      Frontend: ["Next.js", "DaisyUI", "Zustand", "TanStack Query"],
+      Backend: ["Node.js", "Express.js"],
+      Database: ["PostgreSQL", "Drizzle ORM"],
+    },
+    challenges: [
+      "Ensuring concurrency for ticket availability",
+      "Implementing secure OTP-based user verification",
+      "Generating and validating unique QR codes",
+      "Integrating Razorpay for online payments",
+      "Maintaining robust admin controls for events",
+    ],
+
+    demoLink: "https://eventfe.vercel.app/",
+
+    repository: "https://github.com/Shreyas2121/event_fiesta",
+
+    futureImprovements: [
+      "Add advanced analytics & reporting for event organizers",
+      "Support additional payment providers (e.g., PayPal, Stripe)",
+      "Enhance UI with more dynamic dashboards",
+      "Add real-time notifications (e.g., WebSockets) for ticket updates",
+    ],
+  },
+];

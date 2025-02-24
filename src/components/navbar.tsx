@@ -99,9 +99,15 @@ function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4">
+          <div className="md:hidden fixed inset-0 top-16 z-50 bg-slate-900/90 pb-4">
+            {/* Optionally, add a click-to-close overlay:
+    <div
+      className="absolute inset-0"
+      onClick={() => setIsOpen(false)}
+    />
+    */}
+
             <div className="px-2 pt-2 space-y-2">
               {links.map((link) => (
                 <Link
