@@ -144,6 +144,7 @@ export const projects: Project[] = [
       "User Profile & Address Management: Manage personal details and delivery addresses, with delivery zone validation to ensure serviceability.",
       "Coupon & Discount Support: Apply discount coupons during checkout to offer dynamic pricing.",
       "Responsive & Modern UI: Built with Tailwind CSS and Mantine components for a polished, mobile-friendly experience.",
+      "Admin Panel: Manage products, orders, and coupons from a centralized dashboard. View real-time analytics for revenue and orders, update order statuses, and oversee customization groups.",
     ],
     technologyStack: {
       Frontend: [
@@ -167,13 +168,14 @@ export const projects: Project[] = [
       "Managing state efficiently with TanStack Query and Zustand to provide real-time updates and caching.",
       "Validating delivery zones based on pincode to ensure serviceability.",
       "Designing a responsive, modern UI that works seamlessly across devices.",
+      "Building an admin panel that can handle product updates, order tracking, and coupon management in real time.",
     ],
     repository: "https://github.com/Shreyas2121/pizza-store",
     futureImprovements: [
-      "Develop an admin panel for managing products, orders, and delivery zones.",
+      "Enhance admin panel with advanced analytics and order tracking filters.",
       "Improve performance optimizations and state synchronization for large datasets.",
     ],
-    videoLink: "https://www.youtube.com/embed/tRZb4OtL_Jc",
+    videoLink: "https://www.youtube.com/embed/_mc_m6CcBdM",
   },
 
   {

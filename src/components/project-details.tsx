@@ -78,7 +78,7 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project }) => {
           <iframe
             className="w-full h-full"
             src={project.videoLink}
-            title="Pizza Store"
+            title={project.title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
