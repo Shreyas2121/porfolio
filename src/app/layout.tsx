@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Modal from "@/components/modal";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Shreyas Rasaikar | Full-Stack Developer",
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <Modal />
         {children}
+        <Analytics />
       </body>
     </html>
   );
