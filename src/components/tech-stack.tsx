@@ -3,10 +3,12 @@
 import { skills, tools } from "@/lib/constants";
 import { motion } from "motion/react";
 
+
 export default function TechStack() {
   return (
     <section
       id="tech-stack"
+      
       className="py-16 px-6 md:px-12 lg:px-20 bg-gray-900 text-white"
     >
       {/* Title */}
