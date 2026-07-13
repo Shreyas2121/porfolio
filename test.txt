@@ -1,0 +1,74 @@
+# Four-Year Full-Stack Portfolio Refresh                                                                             
+                                                                                                                       
+  ## Summary                                                                                                           
+
+  Yes—a focused UI refresh is recommended. The current design is functional, but it presents you like an early-career  
+  generalist. The new portfolio should position you as a four-year full-stack engineer who owns products end to end.   
+                                                                                                                       
+  Keep the dark theme, but improve hierarchy, spacing, typography, project storytelling, accessibility, and mobile     
+  presentation.                                                                                                        
+                                                                                                                       
+  ## Key Changes                                                                                                       
+                                                                                                                       
+  - Reorder the page: Hero → Selected Work → Experience → Skills → Contact.                                            
+  - Update the hero with four years’ experience, current specialization, location, and clear “View Work” and “Resume”  
+    actions.                                                                                                           
+                                                                                                                       
+  - Add a compact credibility row using only verified facts, such as products delivered, industries worked in, or      
+    deployments owned.                                                                                                 
+                                                                                                                       
+  - Replace the alternating experience timeline and dialogs with readable chronological entries containing 3–4
+    impact-focused achievements.                                                                                       
+                                                                                                                       
+  - Present three sanitized professional case studies. Each should include:                                            
+      - Business problem and project context                                                                           
+      - Your role and ownership                                                                                        
+      - Technical decisions                                                                                            
+      - Difficult engineering challenge                                                                                
+      - Verified result or outcome                                                                                     
+      - Relevant technology stack                                                                                      
+                                                                                                                       
+  - Keep personal projects only when they have a working demo, polished screenshots, or demonstrate skills not         
+    covered by company work.                                                                                           
+                                                                                                                       
+  - Replace subjective skill percentages—especially items such as “VS Code 90%”—with grouped categories: Core,         
+    Frontend, Backend/Data, Infrastructure, and Testing.                                                               
+                                                                                                                       
+  - Replace the non-functional contact form with direct email, LinkedIn, and GitHub actions. Remove Facebook,          
+    Instagram, public phone number, and other hiring-irrelevant information.                                           
+                                                                                                                       
+  - Fix stale copy, “2.5+ years,” encoding errors, outdated resume, metadata, invalid icon import, and inconsistent    
+    animation dependency.                                                                                              
+                                                                                                                       
+  - Keep one teal/emerald accent, reduce card shadows and excessive hover animation, use more whitespace, and add      
+    real project imagery.                                                                                              
+                                                                                                                       
+  - Add keyboard navigation, visible focus states, reduced-motion support, semantic headings, descriptive alt text,    
+    and accessible project details.                                                                                    
+                                                                                                                       
+  ## Internal Data Changes                                                                                             
+                                                                                                                       
+  - Extend project data with slug, role, context, period, summary, outcomes, featured, screenshots, stack, and         
+    optional public links.                                                                                             
+                                                                                                                       
+  - Store experience achievements separately from responsibilities and prohibit invented metrics.                      
+  - Use dedicated project case-study sections or pages instead of large content-heavy modals.                          
+  - No contact API is needed for this refresh; use explicit email and professional-profile links.                      
+                                                                                                                       
+  ## Validation                                                                                                        
+                                                                                                                       
+  - Production build passes without warnings or missing dependencies.                                                  
+  - Review at mobile, tablet, laptop, and wide-desktop sizes.                                                          
+  - All navigation, resume, project, email, GitHub, and LinkedIn links work.                                           
+  - The most important role, experience level, and strongest project are understandable within the first screen.       
+  - Keyboard and screen-reader users can navigate every interactive element.                                           
+  - Verify reasonable Lighthouse accessibility, performance, SEO, and best-practice scores.                            
+  - Confirm that every company claim is non-confidential and every metric is defensible.                               
+                                                                                                                       
+  ## Assumptions                                                                                                       
+                                                                                                                       
+  - Target positioning is full-stack engineering rather than purely frontend or backend.                               
+  - The visual direction remains dark and professional rather than becoming a completely new brand.                    
+  - Company work will be represented through sanitized case studies.                                                   
+  - Exact company names, dates, achievements, project outcomes, screenshots, and updated skills will be supplied       
+    before implementation; none will be fabricated.  

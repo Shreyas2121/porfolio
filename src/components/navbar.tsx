@@ -1,131 +1,99 @@
 "use client";
 import Link from "next/link";
+import { Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import {
-  Home,
-  Code2,
-  Briefcase,
-  LayoutGrid,
-  Mail,
-  Menu,
-  X,
-} from "lucide-react";
-
 const links = [
-  {
-    label: "Home",
-    href: "#",
-    icon: Home,
-  },
-  {
-    label: "Tech Stack",
-    href: "#tech-stack",
-    icon: Code2,
-  },
-  {
-    label: "Experiences",
-    href: "#experience",
-    icon: Briefcase,
-  },
-  {
-    label: "Projects",
-    href: "#projects",
-    icon: LayoutGrid,
-  },
-  {
-    label: "Contact",
-    href: "#contact",
-    icon: Mail,
-  },
+  ["Work", "#work"],
+  ["Experience", "#experience"],
+  ["Skills", "#skills"],
+  ["Contact", "#contact"],
 ];
-
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  // 1️⃣ Listen for scroll events
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+    const s = () => setScrolled(window.scrollY > 24);
+    const k = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    s();
+    window.addEventListener("scroll", s, { passive: true });
+    window.addEventListener("keydown", k);
+    return () => {
+      window.removeEventListener("scroll", s);
+      window.removeEventListener("keydown", k);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   return (
-    <nav
-      className={`fixed w-full top-0 z-50 transition-colors duration-300 ${
-        scrolled
-          ? "bg-slate-900/80 backdrop-blur-md border-b border-slate-800"
-          : ""
-      }`}
+    <header
+      className={
+        "fixed inset-x-0 top-0 z-50 transition " +
+        (scrolled || open
+          ? "border-b border-white/10 bg-slate-950/90 backdrop-blur-xl"
+          : "")
+      }
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navbar Content */}
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8"
+        aria-label="Main navigation"
+      >
+        <Link href="#top" className="flex items-center gap-3">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-300 text-sm font-black text-slate-950">
+            SR
+          </span>
+          <span className="font-semibold">Shreyas Rasaikar</span>
+        </Link>
+        <div className="hidden items-center gap-7 md:flex">
+          {links.map(([l, h]) => (
+            <Link
+              key={h}
+              href={h}
+              className="text-sm text-slate-300 hover:text-white"
+            >
+              {l}
+            </Link>
+          ))}
           <Link
-            href="#"
-            className="flex items-center space-x-2 text-slate-300 hover:text-emerald-400 transition-colors"
+            href="/Shreyas_Resume.pdf"
+            target="_blank"
+            className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
           >
-            <div className="h-8 w-8 bg-emerald-500 rounded-full flex items-center justify-center">
-              <span className="font-bold text-slate-900">S</span>
-            </div>
-            <span className="font-semibold">Portfolio</span>
+            <Download className="h-4 w-4" />
+            Resume
           </Link>
-
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex items-center space-x-2 text-slate-300 hover:text-emerald-400 transition-colors group"
-              >
-                <link.icon className="h-5 w-5 group-hover:-translate-y-1 transition-transform" />
-                <span className="group-hover:-translate-y-1 transition-transform">
-                  {link.label}
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-300 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
         </div>
-
-        {isOpen && (
-          <div className="md:hidden fixed inset-0 top-16 z-50 bg-slate-900/90 pb-4">
-            {/* Optionally, add a click-to-close overlay:
-    <div
-      className="absolute inset-0"
-      onClick={() => setIsOpen(false)}
-    />
-    */}
-
-            <div className="px-2 pt-2 space-y-2">
-              {links.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="flex items-center space-x-3 p-3 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-emerald-400 transition-colors"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <link.icon className="h-5 w-5" />
-                  <span>{link.label}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+        <button
+          className="rounded-lg p-2 md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </nav>
+      {open && (
+        <div
+          id="mobile-menu"
+          className="border-t border-white/10 bg-slate-950 px-5 pb-6 md:hidden"
+        >
+          {links.map(([l, h]) => (
+            <Link
+              key={h}
+              href={h}
+              onClick={() => setOpen(false)}
+              className="block rounded-lg px-3 py-3 text-slate-200"
+            >
+              {l}
+            </Link>
+          ))}
+          <Link
+            href="/Shreyas_Resume.pdf"
+            target="_blank"
+            className="mt-2 flex justify-center rounded-lg bg-emerald-300 px-4 py-3 font-semibold text-slate-950"
+          >
+            View resume
+          </Link>
+        </div>
+      )}
+    </header>
   );
 }
-
-export default Navbar;

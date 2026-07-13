@@ -1,5 +1,3 @@
-"use client";
-
 import ContactForm from "@/components/contact-form";
 import Experience from "@/components/experience";
 import Footer from "@/components/footer";
@@ -10,16 +8,14 @@ import TechStack from "@/components/tech-stack";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white ">
-      <div className="flex flex-col">
-        <Navbar />
-        <Hero />
-      </div>
-      <TechStack />
+    <main className="min-h-screen overflow-hidden bg-slate-950 text-white">
+      <Navbar />
+      <Hero />
+      <Projects />
       <Experience />
-      <Projects/>
+      <TechStack />
       <ContactForm />
       <Footer />
-    </div>
+    </main>
   );
 }
