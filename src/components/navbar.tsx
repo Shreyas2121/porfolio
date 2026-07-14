@@ -2,11 +2,12 @@
 import Link from "next/link";
 import { Download, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./theme-toggle";
 const links = [
-  ["Work", "#work"],
-  ["Experience", "#experience"],
-  ["Skills", "#skills"],
-  ["Contact", "#contact"],
+  ["Projects", "/projects"],
+  ["Experience", "/experience"],
+  ["Skills", "/#skills"],
+  ["Contact", "/#contact"],
 ];
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Navbar() {
         className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8"
         aria-label="Main navigation"
       >
-        <Link href="#top" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <span className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-300 text-sm font-black text-slate-950">
             SR
           </span>
@@ -51,9 +52,9 @@ export default function Navbar() {
               {l}
             </Link>
           ))}
+          <ThemeToggle />
           <Link
-            href="/Shreyas_Resume.pdf"
-            target="_blank"
+            href="/resume"
             className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm font-semibold"
           >
             <Download className="h-4 w-4" />
@@ -61,6 +62,7 @@ export default function Navbar() {
           </Link>
         </div>
         <button
+          type="button"
           className="rounded-lg p-2 md:hidden"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
@@ -85,9 +87,11 @@ export default function Navbar() {
               {l}
             </Link>
           ))}
+          <div className="my-2 px-3">
+            <ThemeToggle />
+          </div>
           <Link
-            href="/Shreyas_Resume.pdf"
-            target="_blank"
+            href="/resume"
             className="mt-2 flex justify-center rounded-lg bg-emerald-300 px-4 py-3 font-semibold text-slate-950"
           >
             View resume

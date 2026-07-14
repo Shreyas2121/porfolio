@@ -12,6 +12,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const themeScript = `
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        var dark = saved === "dark" ||
+          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      } catch (_) {}
+    })();
+  `;
   const person = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -20,5 +31,5 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     address: { "@type": "PostalAddress", addressRegion: "Goa", addressCountry: "IN" },
     sameAs: ["https://github.com/Shreyas2121", "https://www.linkedin.com/in/shreyas-rasaikar-56451920a/"],
   };
-  return <html lang="en"><body className="antialiased">{children}<Analytics /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></body></html>;
+  return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body className="antialiased">{children}<Analytics /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></body></html>;
 }

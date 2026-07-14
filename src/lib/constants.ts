@@ -8,6 +8,10 @@ export type Experience = {
   summary: string;
   achievements: string[];
   stack: string[];
+  selectedWork?: {
+    title: string;
+    description: string;
+  }[];
 };
 
 export type CaseStudy = {
@@ -24,6 +28,7 @@ export type CaseStudy = {
 };
 
 export type IndependentProject = {
+  slug: string;
   title: string;
   context: string;
   description: string;
@@ -32,6 +37,22 @@ export type IndependentProject = {
   repository: string;
   demo?: string;
   images?: ProjectImage[];
+  problem: string;
+  solution: string;
+  users: {
+    role: string;
+    capabilities: string;
+  }[];
+  architecture: {
+    layer: string;
+    details: string;
+    technologies: string[];
+  }[];
+  decisions: {
+    title: string;
+    description: string;
+  }[];
+  limitations: string[];
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -96,6 +117,33 @@ export const experiences: Experience[] = [
       "Implemented OAuth 2.0 token management with in-memory and Redis caching, concurrency control and rate-aware retries, reducing authentication requests by approximately 95%.",
       "Optimised a real-time Formula 1 trading grid for 20+ drivers and 5+ market types using Zustand, Socket.IO, memoisation and granular rendering.",
     ],
+    selectedWork: [
+      {
+        title: "Shared combat-sports architecture",
+        description:
+          "Consolidated seven-plus sports into shared PostgreSQL schemas, TypeORM entities, NestJS services and React interfaces using a sport-type discriminator.",
+      },
+      {
+        title: "Major League Table Tennis",
+        description:
+          "Owned the integration from paginated external APIs and transactional synchronisation through live scores, settlement, publishing and the trader-facing interface.",
+      },
+      {
+        title: "External API reliability",
+        description:
+          "Designed memory and Redis token caching, concurrency control, pre-expiry refresh and rate-aware retry behaviour for OAuth-protected providers.",
+      },
+      {
+        title: "Data quality and recovery",
+        description:
+          "Built configuration-driven odds validation and heartbeat-triggered resynchronisation to prevent invalid data and recover from downstream outages.",
+      },
+      {
+        title: "Real-time trading performance",
+        description:
+          "Collaborated on an F1 trading grid with granular Socket.IO updates and Zustand stores to keep dense, frequently changing market data responsive.",
+      },
+    ],
     stack: ["TypeScript", "NestJS", "React", "PostgreSQL", "Redis", "TypeORM", "WebSockets"],
   },
   {
@@ -108,6 +156,23 @@ export const experiences: Experience[] = [
     achievements: [
       "Built admin, checkout, appointment and interactive dashboard features using React, Node.js, PostgreSQL and MongoDB.",
       "Contributed across API integration, state management and Docker-based delivery workflows.",
+    ],
+    selectedWork: [
+      {
+        title: "Commerce platform",
+        description:
+          "Led frontend architecture for a new storefront and administration system covering catalogue, customisation, checkout, payments, coupons and orders.",
+      },
+      {
+        title: "Pet-care operations",
+        description:
+          "Built role-specific portals and dashboards for administrators, veterinarians and groomers with supporting Node.js and PostgreSQL work.",
+      },
+      {
+        title: "Restaurant analytics",
+        description:
+          "Translated Figma designs into responsive charts, date-range workflows and downloadable reporting interfaces.",
+      },
     ],
     stack: ["React", "Node.js", "PostgreSQL", "MongoDB", "TanStack Query", "Docker"],
   },
@@ -122,6 +187,18 @@ export const experiences: Experience[] = [
       "Developed healthcare workflows with CodeIgniter, PHP, REST APIs and SQL.",
       "Automated cron-based processes, PDF and Excel generation, and OAuth 2.0 email integration.",
     ],
+    selectedWork: [
+      {
+        title: "Healthcare records",
+        description:
+          "Delivered a responsive patient-record workflow with CodeIgniter and PHP while working directly with a Netherlands-based client.",
+      },
+      {
+        title: "Business integrations",
+        description:
+          "Developed REST APIs, complex SQL queries, scheduled server synchronisation and document-generation workflows.",
+      },
+    ],
     stack: ["PHP", "CodeIgniter", "MySQL", "JavaScript", "REST APIs", "Linux"],
   },
   {
@@ -135,9 +212,23 @@ export const experiences: Experience[] = [
       "Worked with Python, Flask and Selenium across development and automated-testing exercises.",
       "Practised API, performance and manual testing with Jenkins, Git and AWS fundamentals.",
     ],
+    selectedWork: [
+      {
+        title: "Engineering foundations",
+        description:
+          "Completed practical development and testing exercises covering automation, API testing, performance fundamentals and continuous integration.",
+      },
+    ],
     stack: ["Python", "Flask", "Selenium", "Jenkins", "Git", "API testing"],
   },
 ];
+
+export const education = {
+  qualification: "B.E. in Information Technology",
+  institution: "Padre Conceicao College of Engineering",
+  period: "2018 - 2022",
+  result: "70%",
+};
 
 export const skillGroups = [
   {
@@ -160,6 +251,7 @@ export const skillGroups = [
 
 export const independentProjects: IndependentProject[] = [
   {
+    slug: "staymate",
     title: "StayMate",
     context: "Full-stack rental marketplace",
     description:
@@ -172,8 +264,77 @@ export const independentProjects: IndependentProject[] = [
     stack: ["NestJS", "React", "PostgreSQL", "TypeORM", "Stripe", "Socket.IO", "TanStack Query"],
     repository: "https://github.com/Shreyas2121/stay-mate",
     demo: "https://stay-mate-three.vercel.app/",
+    problem:
+      "Rental marketplaces coordinate discovery, availability, payments and communication across guests, hosts and platform administrators. The challenge was to model those connected workflows as one coherent product instead of a collection of disconnected CRUD screens.",
+    solution:
+      "StayMate combines a role-aware NestJS API with a React client for property discovery, Stripe checkout, host operations, platform administration and authenticated real-time conversations. Booking state connects the payment, availability and messaging domains.",
+    users: [
+      {
+        role: "Guests",
+        capabilities:
+          "Discover and save listings, inspect property details, complete Stripe test checkout, manage trips and message hosts after a confirmed booking.",
+      },
+      {
+        role: "Hosts",
+        capabilities:
+          "Apply for verification, create and manage listings, control availability, review reservations, communicate with guests and inspect earnings.",
+      },
+      {
+        role: "Administrators",
+        capabilities:
+          "Review host applications, manage coupons, inspect listing bookings and coordinate payout workflows.",
+      },
+    ],
+    architecture: [
+      {
+        layer: "Frontend",
+        details:
+          "Route-driven React application with feature modules, server-state caching, session state, responsive UI primitives and map-based discovery.",
+        technologies: ["React 19", "Vite", "TanStack Router", "TanStack Query", "Zustand", "Leaflet"],
+      },
+      {
+        layer: "Backend",
+        details:
+          "Modular NestJS API with domain boundaries for users, listings, bookings, payments, messaging, wishlists and administration.",
+        technologies: ["NestJS", "TypeScript", "JWT", "Socket.IO", "Swagger"],
+      },
+      {
+        layer: "Data and integrations",
+        details:
+          "Relational booking data with external services for payment processing, media storage and real-time delivery.",
+        technologies: ["PostgreSQL", "TypeORM", "Stripe", "Cloudinary"],
+      },
+    ],
+    decisions: [
+      {
+        title: "Webhook-driven booking confirmation",
+        description:
+          "Stripe checkout initiates payment, while the webhook-driven backend flow confirms booking state instead of trusting a browser redirect.",
+      },
+      {
+        title: "Booking-linked conversations",
+        description:
+          "Messaging is associated with confirmed booking relationships so real-time communication follows product authorization rules.",
+      },
+      {
+        title: "Role-aware product surfaces",
+        description:
+          "Guest, host and administrator capabilities are separated through backend guards and purpose-built frontend routes.",
+      },
+      {
+        title: "Feature-oriented frontend",
+        description:
+          "Discovery, booking, host, admin and messaging code is grouped around product domains rather than generic component categories.",
+      },
+    ],
+    limitations: [
+      "Stripe operates in test mode and the project does not claim production payment traffic.",
+      "Development environments currently use TypeORM schema synchronisation; production evolution should use migrations.",
+      "Automated coverage should be expanded around payment authorization, booking conflicts and webhook replay scenarios.",
+    ],
   },
   {
+    slug: "workforce-operations",
     title: "Workforce Operations",
     context: "Multi-tenant scheduling platform",
     description:
@@ -186,5 +347,165 @@ export const independentProjects: IndependentProject[] = [
     stack: ["NestJS", "React", "PostgreSQL", "TypeORM", "TanStack Start", "TanStack Query"],
     repository: "https://github.com/Shreyas2121/operations-manage",
     demo: "https://operations-manage.vercel.app/",
+    problem:
+      "Shift-based organisations need more than a calendar: schedules must respect team boundaries, worker availability, approved leave, role permissions, capacity and overlapping assignments while keeping operational changes traceable.",
+    solution:
+      "Workforce Operations is a tenant-scoped scheduling platform where administrators configure organisations and teams, managers operate team schedules, and workers manage availability and time-off requests. Business constraints are enforced by the API rather than left to the interface.",
+    users: [
+      {
+        role: "Administrators",
+        capabilities:
+          "Create teams and staff, assign users to teams and inspect organisation-wide operations and audit history.",
+      },
+      {
+        role: "Managers",
+        capabilities:
+          "Manage workers in their team, create shifts, assign or remove workers and review time-off requests.",
+      },
+      {
+        role: "Workers",
+        capabilities:
+          "View assigned shifts, maintain recurring availability and submit or track time-off requests.",
+      },
+    ],
+    architecture: [
+      {
+        layer: "Frontend",
+        details:
+          "Server-rendered React application with route-level role surfaces, shared data components and a startup gate for a sleeping API.",
+        technologies: ["React 19", "TanStack Start", "TanStack Router", "TanStack Query", "Tailwind CSS"],
+      },
+      {
+        layer: "Backend",
+        details:
+          "Organisation-aware NestJS modules for authentication, users, teams, shifts, availability, leave and audit logging.",
+        technologies: ["NestJS", "TypeScript", "JWT", "Role guards", "Swagger"],
+      },
+      {
+        layer: "Data and deployment",
+        details:
+          "Relational organisation and scheduling model deployed as independently hosted frontend and API services.",
+        technologies: ["PostgreSQL", "TypeORM", "Neon", "Render", "Vercel"],
+      },
+    ],
+    decisions: [
+      {
+        title: "Server-enforced scheduling rules",
+        description:
+          "Assignment checks cover team membership, worker role, duplicates, capacity, overlap, availability and approved leave before state changes are accepted.",
+      },
+      {
+        title: "Organisation-scoped access",
+        description:
+          "Tenant context and role guards constrain data access so users operate only within their organisation and permitted team scope.",
+      },
+      {
+        title: "Auditable operations",
+        description:
+          "Important administrative and scheduling changes create audit records for operational visibility.",
+      },
+      {
+        title: "Protected demo bootstrap",
+        description:
+          "Fresh deployments can create controlled demonstration data through explicitly enabled, key-protected setup tools.",
+      },
+    ],
+    limitations: [
+      "Shift swaps and real-time schedule updates are not currently implemented.",
+      "Optimistic concurrency and idempotent write handling remain future reliability improvements.",
+      "Production schema evolution should replace development-time TypeORM synchronisation with migrations.",
+    ],
+  },
+  {
+    slug: "food-delivery-platform",
+    title: "Food Delivery Platform",
+    context: "Full-stack ordering and operations",
+    description:
+      "A complete food-ordering product with configurable menu items, cart and coupon flows, serviceable delivery zones, Razorpay payments and an administration dashboard.",
+    highlights: [
+      "Product customisation through configurable add-on groups",
+      "Online Razorpay payments and cash-on-delivery checkout",
+      "Admin workflows for products, coupons, orders and operational analytics",
+    ],
+    stack: [
+      "React",
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Drizzle ORM",
+      "TanStack Query",
+      "Zustand",
+      "Razorpay",
+    ],
+    repository: "https://github.com/Shreyas2121/pizza-store",
+    problem:
+      "Food ordering becomes difficult to model when products have optional add-ons, discounts depend on checkout state, delivery is limited by service area, and payments must stay aligned with order status. Administrators also need one place to operate the catalogue and incoming orders.",
+    solution:
+      "The platform connects a responsive customer storefront to a Node.js API and PostgreSQL database. Customers can configure products, manage a cart, apply coupons, validate delivery addresses and choose online payment or cash on delivery, while administrators operate products, orders and promotions.",
+    users: [
+      {
+        role: "Customers",
+        capabilities:
+          "Browse the menu, customise products, manage cart items, apply coupons, save delivery addresses and complete online or cash-on-delivery checkout.",
+      },
+      {
+        role: "Administrators",
+        capabilities:
+          "Manage products, customisation groups, coupons and orders, update fulfilment status and review revenue and order information.",
+      },
+    ],
+    architecture: [
+      {
+        layer: "Frontend",
+        details:
+          "Responsive React storefront and administration interface with separate server-state and client-state responsibilities.",
+        technologies: [
+          "React",
+          "Tailwind CSS",
+          "Mantine",
+          "TanStack Query",
+          "Zustand",
+        ],
+      },
+      {
+        layer: "Backend",
+        details:
+          "Express API covering catalogue, customisation, carts, coupons, customer addresses, delivery validation, orders and payment workflows.",
+        technologies: ["Node.js", "Express", "Zod", "REST APIs"],
+      },
+      {
+        layer: "Data and payments",
+        details:
+          "Relational product and ordering data with Razorpay integration for online checkout and support for cash-on-delivery orders.",
+        technologies: ["PostgreSQL", "Drizzle ORM", "Razorpay"],
+      },
+    ],
+    decisions: [
+      {
+        title: "Composable product customisation",
+        description:
+          "Add-on groups are modelled separately from base products so customers can build valid item configurations without duplicating catalogue entries.",
+      },
+      {
+        title: "Separate server and cart state",
+        description:
+          "TanStack Query manages API-backed data and cache invalidation, while Zustand handles immediate customer cart interactions.",
+      },
+      {
+        title: "Delivery-zone validation",
+        description:
+          "Checkout validates the customer address against supported pincodes before an order can be placed.",
+      },
+      {
+        title: "Multiple payment paths",
+        description:
+          "The order workflow supports both Razorpay checkout and cash on delivery while retaining a shared order-management model.",
+      },
+    ],
+    limitations: [
+      "The project does not currently provide a maintained public live demo.",
+      "Advanced delivery tracking and real-time customer notifications remain future improvements.",
+      "Administrative analytics can be expanded with deeper filtering and longer-term reporting.",
+    ],
   },
 ];

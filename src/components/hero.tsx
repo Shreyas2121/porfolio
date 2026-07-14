@@ -19,7 +19,7 @@ export default function Hero() {
         <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">I&apos;m Shreyas, a full-stack developer with nearly four years of experience building B2B platforms and customer-facing products using TypeScript, React, NestJS, PostgreSQL and Redis.</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <Link href="#work" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3.5 font-bold text-slate-950">See selected work<ArrowDownRight className="h-5 w-5"/></Link>
-          <Link href="/Shreyas_Resume.pdf" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold"><Download className="h-5 w-5"/>View resume</Link>
+          <Link href="/resume" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold"><Download className="h-5 w-5"/>View resume</Link>
         </div>
         <div className="mt-12 grid max-w-2xl gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">{signals.map(([value,label])=><div key={value} className="bg-slate-950/85 px-5 py-4"><p className="font-semibold">{value}</p><p className="mt-1 text-xs text-slate-400">{label}</p></div>)}</div>
       </div>
@@ -28,7 +28,7 @@ export default function Hero() {
         <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 p-3"><div className="relative aspect-[4/5] overflow-hidden rounded-[1.45rem]">
           <Image src={image} alt="Shreyas Rasaikar" fill priority sizes="(max-width:1024px) 90vw,420px" className="object-cover object-top"/>
           <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950"/>
-          <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-slate-950/75 p-4 backdrop-blur-xl"><p className="text-sm font-semibold">Backend correctness. Clear interfaces. Reliable delivery.</p><p className="mt-1 flex items-center gap-1.5 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5 text-emerald-300"/>Goa, India</p></div>
+          <div className="photo-overlay absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-slate-950/75 p-4 backdrop-blur-xl"><p className="text-sm font-semibold">Backend correctness. Clear interfaces. Reliable delivery.</p><p className="mt-1 flex items-center gap-1.5 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5 text-emerald-300"/>Goa, India</p></div>
         </div></div>
       </div>
     </div>
