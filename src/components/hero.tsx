@@ -2,5 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDownRight, Download, MapPin } from "lucide-react";
 import image from "../assests/image.avif";
-const signals=[["4 years","Building web products"],["End to end","UI, APIs and delivery"],["Goa, India","Based in"]];
-export default function Hero(){return <section id="top" className="relative isolate min-h-[92vh] pt-28"><div className="absolute inset-0 -z-10 grid-glow"/><div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:pb-24 lg:pt-24"><div><div className="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-3 py-1.5 text-sm text-emerald-200"><span className="h-2 w-2 rounded-full bg-emerald-300"/>Full-stack developer</div><h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">I build product systems from <span className="text-emerald-300">interface to infrastructure.</span></h1><p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">I&apos;m Shreyas, a full-stack developer with four years of hands-on experience shipping commerce, operations and analytics products using React, TypeScript, Node.js and PostgreSQL.</p><div className="mt-9 flex flex-col gap-3 sm:flex-row"><Link href="#work" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3.5 font-bold text-slate-950">See selected work<ArrowDownRight className="h-5 w-5"/></Link><Link href="/Shreyas_Resume.pdf" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold"><Download className="h-5 w-5"/>View resume</Link></div><div className="mt-12 grid max-w-2xl gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">{signals.map(([v,l])=><div key={v} className="bg-slate-950/85 px-5 py-4"><p className="font-semibold">{v}</p><p className="mt-1 text-xs text-slate-400">{l}</p></div>)}</div></div><div className="relative mx-auto w-full max-w-md"><div className="absolute -inset-7 rounded-[2.5rem] bg-gradient-to-br from-violet-500/20 to-emerald-300/20 blur-2xl"/><div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 p-3"><div className="relative aspect-[4/5] overflow-hidden rounded-[1.45rem]"><Image src={image} alt="Shreyas Rasaikar" fill priority sizes="(max-width:1024px) 90vw,420px" className="object-cover object-top"/><div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950"/><div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-slate-950/75 p-4 backdrop-blur-xl"><p className="text-sm font-semibold">Building reliable products, not just features.</p><p className="mt-1 flex items-center gap-1.5 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5 text-emerald-300"/>Goa, India</p></div></div></div></div></div></section>}
+
+const signals = [
+  ["Nearly 4 years", "Product engineering"],
+  ["Real time", "Data and WebSockets"],
+  ["End to end", "Architecture to interface"],
+];
+
+export default function Hero() {
+  return <section id="top" className="relative isolate min-h-[92vh] pt-28">
+    <div className="absolute inset-0 -z-10 grid-glow"/>
+    <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:pb-24 lg:pt-24">
+      <div>
+        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-3 py-1.5 text-sm text-emerald-200"><span className="h-2 w-2 rounded-full bg-emerald-300"/>Full-stack developer</div>
+        <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">I build real-time products from <span className="text-emerald-300">data model to interface.</span></h1>
+        <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">I&apos;m Shreyas, a full-stack developer with nearly four years of experience building B2B platforms and customer-facing products using TypeScript, React, NestJS, PostgreSQL and Redis.</p>
+        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <Link href="#work" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3.5 font-bold text-slate-950">See selected work<ArrowDownRight className="h-5 w-5"/></Link>
+          <Link href="/Shreyas_Resume.pdf" target="_blank" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold"><Download className="h-5 w-5"/>View resume</Link>
+        </div>
+        <div className="mt-12 grid max-w-2xl gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">{signals.map(([value,label])=><div key={value} className="bg-slate-950/85 px-5 py-4"><p className="font-semibold">{value}</p><p className="mt-1 text-xs text-slate-400">{label}</p></div>)}</div>
+      </div>
+      <div className="relative mx-auto w-full max-w-md">
+        <div className="absolute -inset-7 rounded-[2.5rem] bg-gradient-to-br from-violet-500/20 to-emerald-300/20 blur-2xl"/>
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 p-3"><div className="relative aspect-[4/5] overflow-hidden rounded-[1.45rem]">
+          <Image src={image} alt="Shreyas Rasaikar" fill priority sizes="(max-width:1024px) 90vw,420px" className="object-cover object-top"/>
+          <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950"/>
+          <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-slate-950/75 p-4 backdrop-blur-xl"><p className="text-sm font-semibold">Backend correctness. Clear interfaces. Reliable delivery.</p><p className="mt-1 flex items-center gap-1.5 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5 text-emerald-300"/>Goa, India</p></div>
+        </div></div>
+      </div>
+    </div>
+  </section>;
+}

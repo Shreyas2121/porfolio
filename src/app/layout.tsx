@@ -4,8 +4,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Shreyas Rasaikar | Full-Stack Developer",
-  description: "Full-stack developer with four years of experience building commerce, operations and analytics products with React, TypeScript, Node.js and PostgreSQL.",
-  keywords: ["Shreyas Rasaikar", "Full-Stack Developer", "React", "Node.js", "TypeScript", "Goa"],
+  description: "Full-stack developer with nearly four years of experience building real-time B2B platforms using TypeScript, React, NestJS, PostgreSQL, Redis and WebSockets.",
+  keywords: ["Shreyas Rasaikar", "Full-Stack Developer", "NestJS", "React", "PostgreSQL", "Redis", "WebSockets", "TypeScript", "Goa"],
   authors: [{ name: "Shreyas Rasaikar" }],
   creator: "Shreyas Rasaikar",
   icons: { icon: "/favicon.ico" },
