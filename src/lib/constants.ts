@@ -251,6 +251,94 @@ export const skillGroups = [
 
 export const independentProjects: IndependentProject[] = [
   {
+    slug: "chaibook-lm",
+    title: "Chaibook LM",
+    context: "AI-powered research workspace",
+    description:
+      "A multi-notebook research assistant that indexes five source types and produces streamed, evidence-grounded answers with inspectable citations.",
+    highlights: [
+      "Notebook-scoped hybrid retrieval across PDF, text, website, YouTube and VTT sources",
+      "Retry-safe background indexing with OpenAI embeddings and PostgreSQL pgvector",
+      "Server-controlled citations that open the supporting page, passage, section or timestamp",
+    ],
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "PostgreSQL",
+      "pgvector",
+      "Drizzle ORM",
+      "Supabase",
+      "Inngest",
+      "OpenAI",
+      "LangChain",
+    ],
+    repository: "https://github.com/Shreyas2121/chaibook-lm",
+    demo: "https://chaibook-lm-three.vercel.app/",
+    problem:
+      "General-purpose AI chat makes it difficult to verify where an answer came from, while research material is often fragmented across documents, websites, videos and transcripts. A useful research assistant must retrieve only relevant evidence, preserve its location and prevent information from leaking between notebooks.",
+    solution:
+      "Chaibook LM turns each notebook into an isolated knowledge base. It extracts and chunks five source types, creates embeddings in a retry-safe background pipeline, combines vector and full-text retrieval, and streams answers grounded only in retrieved evidence. Every citation is mapped by the server to a real source chunk and can be inspected at its original location.",
+    users: [
+      {
+        role: "Researchers and students",
+        capabilities:
+          "Organise source material into separate notebooks, ask cross-source questions and inspect the exact evidence behind each answer.",
+      },
+      {
+        role: "Knowledge workers",
+        capabilities:
+          "Index documents, websites, captioned videos and transcripts, then explore them through grounded questions and follow-ups.",
+      },
+    ],
+    architecture: [
+      {
+        layer: "Application and identity",
+        details:
+          "Next.js workspace with Google sign-in, server-rendered notebook routes and owner-scoped application services.",
+        technologies: ["Next.js 16", "React 19", "Supabase Auth", "Tailwind CSS"],
+      },
+      {
+        layer: "Ingestion pipeline",
+        details:
+          "Retryable background jobs extract, normalise, chunk and embed five source types before atomically activating a new index generation.",
+        technologies: ["Inngest", "LangChain", "OpenAI embeddings", "Supabase Storage"],
+      },
+      {
+        layer: "Retrieval and citations",
+        details:
+          "Notebook-filtered hybrid search feeds bounded evidence to a streaming answer service, while server-owned chunk mappings keep citations traceable and authorized.",
+        technologies: ["PostgreSQL", "pgvector", "Drizzle ORM", "Vercel AI SDK"],
+      },
+    ],
+    decisions: [
+      {
+        title: "Evidence-bound answers",
+        description:
+          "The model receives a bounded set of retrieved chunks and returns an explicit insufficient-evidence response when the notebook cannot support an answer.",
+      },
+      {
+        title: "Server-controlled provenance",
+        description:
+          "Citation labels are assigned to real retrieved chunks by the server, preserving source and locator metadata instead of asking the model to invent references.",
+      },
+      {
+        title: "Generation-based indexing",
+        description:
+          "Re-indexing writes a new source generation and activates it atomically so failed retries cannot mix partial or duplicate vectors into retrieval.",
+      },
+      {
+        title: "Isolation and defensive ingestion",
+        description:
+          "Owner and notebook predicates protect relational and vector queries, while remote fetching validates DNS and redirects and bounds content, time and response size.",
+      },
+    ],
+    limitations: [
+      "Conversation context is currently session-bound and is cleared when the page is refreshed.",
+      "Scanned and image-only PDFs are not supported because OCR is not yet implemented.",
+      "YouTube indexing depends on accessible captions and may require the configured transcript provider.",
+    ],
+  },
+  {
     slug: "staymate",
     title: "StayMate",
     context: "Full-stack rental marketplace",
