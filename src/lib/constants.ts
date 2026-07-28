@@ -251,15 +251,16 @@ export const skillGroups = [
 
 export const independentProjects: IndependentProject[] = [
   {
-    slug: "chaibook-lm",
-    title: "Chaibook LM",
+    slug: "citeleaf",
+    title: "Citeleaf",
     context: "AI-powered research workspace",
     description:
-      "A multi-notebook research assistant that indexes five source types and produces streamed, evidence-grounded answers with inspectable citations.",
+      "A multi-notebook research assistant that indexes five source types, produces cited answers, persists conversations and generates evidence-grounded learning roadmaps from selected YouTube sources.",
     highlights: [
       "Notebook-scoped hybrid retrieval across PDF, text, website, YouTube and VTT sources",
-      "Retry-safe background indexing with OpenAI embeddings and PostgreSQL pgvector",
-      "Server-controlled citations that open the supporting page, passage, section or timestamp",
+      "Persistent notebook conversations with durable message states and citation snapshots",
+      "Playlist-aware YouTube ingestion and personalised roadmaps grounded in selected transcripts",
+      "Immutable roadmap versions with verified timestamps, progress tracking and retry-safe generation",
     ],
     stack: [
       "Next.js",
@@ -277,12 +278,12 @@ export const independentProjects: IndependentProject[] = [
     problem:
       "General-purpose AI chat makes it difficult to verify where an answer came from, while research material is often fragmented across documents, websites, videos and transcripts. A useful research assistant must retrieve only relevant evidence, preserve its location and prevent information from leaking between notebooks.",
     solution:
-      "Chaibook LM turns each notebook into an isolated knowledge base. It extracts and chunks five source types, creates embeddings in a retry-safe background pipeline, combines vector and full-text retrieval, and streams answers grounded only in retrieved evidence. Every citation is mapped by the server to a real source chunk and can be inspected at its original location.",
+      "Citeleaf turns each notebook into an isolated knowledge base. It extracts and chunks five source types, creates embeddings in a retry-safe background pipeline, combines vector and full-text retrieval, and streams answers grounded only in retrieved evidence. Every citation is mapped by the server to a real source chunk and remains inspectable across conversations. Users can also import YouTube playlists and generate persistent learning roadmaps whose lessons link back to server-verified transcript evidence.",
     users: [
       {
         role: "Researchers and students",
         capabilities:
-          "Organise source material into separate notebooks, ask cross-source questions and inspect the exact evidence behind each answer.",
+          "Organise source material into separate notebooks, ask cross-source questions, inspect answer evidence and generate structured learning roadmaps from selected videos.",
       },
       {
         role: "Knowledge workers",
@@ -306,8 +307,14 @@ export const independentProjects: IndependentProject[] = [
       {
         layer: "Retrieval and citations",
         details:
-          "Notebook-filtered hybrid search feeds bounded evidence to a streaming answer service, while server-owned chunk mappings keep citations traceable and authorized.",
+          "Notebook-filtered hybrid search feeds bounded evidence to a streaming answer service, while persistent conversations and server-owned citation snapshots keep answers traceable across reloads and source re-indexing.",
         technologies: ["PostgreSQL", "pgvector", "Drizzle ORM", "Vercel AI SDK"],
+      },
+      {
+        layer: "Learning roadmap pipeline",
+        details:
+          "Two-pass structured generation builds persistent roadmap versions from explicitly selected ready videos, verifies cited chunks server-side and preserves the active plan when regeneration fails.",
+        technologies: ["OpenAI", "Inngest", "Zod", "PostgreSQL"],
       },
     ],
     decisions: [
@@ -331,9 +338,13 @@ export const independentProjects: IndependentProject[] = [
         description:
           "Owner and notebook predicates protect relational and vector queries, while remote fetching validates DNS and redirects and bounds content, time and response size.",
       },
+      {
+        title: "Versioned, evidence-grounded roadmaps",
+        description:
+          "Roadmaps use immutable versions and server-verified evidence snapshots so lessons remain traceable, progress survives regeneration and failed jobs cannot replace the active plan.",
+      },
     ],
     limitations: [
-      "Conversation context is currently session-bound and is cleared when the page is refreshed.",
       "Scanned and image-only PDFs are not supported because OCR is not yet implemented.",
       "YouTube indexing depends on accessible captions and may require the configured transcript provider.",
     ],
