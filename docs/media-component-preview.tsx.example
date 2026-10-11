@@ -1,0 +1,11 @@
+import ProjectMediaSection from "@/components/project-media";
+import type { ProjectMedia } from "@/lib/constants";
+const visual = { src: "/projects/citeleaf-cover.svg", alt: "Test research workflow", width: 960, height: 600, caption: "Research screenshot fixture" };
+const media: ProjectMedia[] = [
+  { ...visual, id: "one", type: "screenshot", section: "gallery" },
+  { ...visual, id: "two", src: "/projects/staymate-cover.svg", caption: "Booking screenshot fixture", type: "screenshot", section: "gallery" },
+  { ...visual, id: "broken", src: "/__missing-test-image.svg", caption: "Broken screenshot fixture", type: "screenshot", section: "gallery" },
+  { ...visual, id: "diagram", type: "diagram", section: "architecture", caption: "Architecture fixture", explanation: "Test text equivalent for the architecture diagram." },
+  { id: "video", type: "video", section: "walkthrough", src: "/__missing-test-video.mp4", poster: visual.src, width: 960, height: 600, title: "Test walkthrough", caption: "Video fixture", duration: "0:45", steps: ["Inspect the source.", "Follow the cited answer."], transcript: "/projects/citeleaf-cover.svg", captions: [{ src: "/__missing-test-captions.vtt", language: "en", label: "English" }] }
+];
+export default function Preview() { return <main className="min-h-screen bg-slate-950 text-white"><h1>Media component checks</h1><ProjectMediaSection media={media} section="gallery" /><ProjectMediaSection media={media} section="walkthrough" /><section aria-label="Architecture"><ProjectMediaSection media={media} section="architecture" /></section></main>; }

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <title>Unified multi-sport architecture</title>
+  <desc>Seven-plus combat sports use a shared sport-type data model, NestJS APIs and React interfaces. Reconstructed from the case study description.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#6d28d9" stroke-width="2"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="#f5f3ff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="65" font-size="28" font-weight="700" fill="#6d28d9">MULTI-SPORT PLATFORM</text>
+    <text x="48" y="118" font-size="42" font-weight="700" fill="#1e1b4b">Many sports. One shared model.</text>
+    <rect x="48" y="159" width="255" height="81" rx="18" fill="#ede9fe" stroke="#c4b5fd" stroke-width="2"/>
+    <text x="175" y="194" text-anchor="middle" font-size="32" font-weight="700" fill="#4c1d95">7+ sports</text>
+    <text x="175" y="224" text-anchor="middle" font-size="25" fill="#4c1d95">Distinct sport rules</text>
+    <rect x="351" y="159" width="561" height="81" rx="18" fill="#fff" stroke="#c4b5fd" stroke-width="2"/>
+    <text x="631" y="194" text-anchor="middle" font-size="30" font-weight="700" fill="#1e1b4b">Sport-type discriminator</text>
+    <text x="631" y="224" text-anchor="middle" font-size="25" fill="#57506f">Shared structure, distinct rules</text>
+    <path d="M305 199H339 M631 242V279" stroke="#6d28d9" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+    <rect x="48" y="294" width="864" height="127" rx="20" fill="#4c1d95"/>
+    <text x="480" y="337" text-anchor="middle" font-size="32" font-weight="700" fill="#fff">PostgreSQL + TypeORM</text>
+    <text x="480" y="382" text-anchor="middle" font-size="28" fill="#ede9fe">Events · Participants · Scores · Markets · Odds</text>
+    <path d="M265 423V463 M695 423V463" stroke="#6d28d9" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+    <rect x="48" y="478" width="417" height="79" rx="18" fill="#fff" stroke="#c4b5fd" stroke-width="2"/>
+    <text x="256" y="525" text-anchor="middle" font-size="30" font-weight="700" fill="#1e1b4b">Unified NestJS APIs</text>
+    <rect x="495" y="478" width="417" height="79" rx="18" fill="#fff" stroke="#c4b5fd" stroke-width="2"/>
+    <text x="703" y="525" text-anchor="middle" font-size="30" font-weight="700" fill="#1e1b4b">Shared React interfaces</text>
+  </g>
+</svg>

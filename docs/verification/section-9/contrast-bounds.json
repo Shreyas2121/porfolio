@@ -1,0 +1,261 @@
+{
+  "method": "Contrast bounds from the implemented theme values, with alpha compositing for badges and conservative black/white scroll backdrops plus the maximum decorative glow/grid opacities. These supplement axe checks where gradients prevent automatic resolution.",
+  "pairs": [
+    {
+      "label": "light primary action",
+      "foreground": [
+        255,
+        255,
+        255
+      ],
+      "background": [
+        4,
+        120,
+        87
+      ],
+      "contrast": 5.48,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light current-role badge",
+      "foreground": [
+        6,
+        95,
+        70
+      ],
+      "background": [
+        215,
+        227,
+        228
+      ],
+      "contrast": 5.86,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light secondary text on surface",
+      "foreground": [
+        71,
+        85,
+        105
+      ],
+      "background": [
+        255,
+        255,
+        255
+      ],
+      "contrast": 7.58,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light active navigation over worst-case scroll backdrop",
+      "foreground": [
+        6,
+        95,
+        70
+      ],
+      "background": [
+        223,
+        225,
+        227
+      ],
+      "contrast": 5.86,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light navigation over worst-case scroll backdrop",
+      "foreground": [
+        51,
+        65,
+        85
+      ],
+      "background": [
+        223,
+        225,
+        227
+      ],
+      "contrast": 7.9,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light eyebrow on combined maximum glow and grid",
+      "foreground": [
+        6,
+        95,
+        70
+      ],
+      "background": [
+        222,
+        234,
+        233
+      ],
+      "contrast": 6.23,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "light body text on combined maximum glow and grid",
+      "foreground": [
+        51,
+        65,
+        85
+      ],
+      "background": [
+        222,
+        234,
+        233
+      ],
+      "contrast": 8.4,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark primary action",
+      "foreground": [
+        2,
+        6,
+        23
+      ],
+      "background": [
+        110,
+        231,
+        183
+      ],
+      "contrast": 13.23,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark current-role badge",
+      "foreground": [
+        110,
+        231,
+        183
+      ],
+      "background": [
+        18,
+        37,
+        47
+      ],
+      "contrast": 10.38,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark secondary text on surface",
+      "foreground": [
+        148,
+        163,
+        184
+      ],
+      "background": [
+        15,
+        23,
+        42
+      ],
+      "contrast": 6.96,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark active navigation over worst-case scroll backdrop",
+      "foreground": [
+        110,
+        231,
+        183
+      ],
+      "background": [
+        27,
+        31,
+        46
+      ],
+      "contrast": 10.75,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark navigation over worst-case scroll backdrop",
+      "foreground": [
+        203,
+        213,
+        225
+      ],
+      "background": [
+        27,
+        31,
+        46
+      ],
+      "contrast": 11.03,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark eyebrow on combined maximum glow and grid",
+      "foreground": [
+        110,
+        231,
+        183
+      ],
+      "background": [
+        9,
+        23,
+        35
+      ],
+      "contrast": 11.92,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "dark body text on combined maximum glow and grid",
+      "foreground": [
+        203,
+        213,
+        225
+      ],
+      "background": [
+        9,
+        23,
+        35
+      ],
+      "contrast": 12.23,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "Photo caption on its opaque panel",
+      "foreground": [
+        248,
+        250,
+        252
+      ],
+      "background": [
+        2,
+        6,
+        23
+      ],
+      "contrast": 19.28,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "label": "Contact email action",
+      "foreground": [
+        110,
+        231,
+        183
+      ],
+      "background": [
+        2,
+        6,
+        23
+      ],
+      "contrast": 13.23,
+      "minimum": 4.5,
+      "passed": true
+    }
+  ]
+}

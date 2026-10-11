@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowUpRight,
-  Download,
-  FileText,
-} from "lucide-react";
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+import { ArrowLeft, ArrowUpRight, Download } from "lucide-react";
 import {
   resumeDownloadUrl,
   resumePreviewUrl,
   resumeViewUrl,
 } from "@/lib/resume";
+import ResumePreview from "@/components/resume-preview";
 
 export const metadata: Metadata = {
   title: "Resume | Shreyas Rasaikar",
@@ -23,78 +17,65 @@ export const metadata: Metadata = {
 export default function ResumePage() {
   return (
     <main
-      id="top"
-      className="min-h-screen overflow-hidden bg-slate-950 text-white"
+      id="main-content"
+      tabIndex={-1}
+      className="min-h-screen bg-page text-foreground"
     >
-      <Navbar />
-
-      <section className="relative isolate border-b border-white/5 pb-14 pt-36">
+      <section className="relative isolate border-b border-line pb-12 pt-28 sm:pb-16 sm:pt-32">
         <div className="absolute inset-0 -z-10 grid-glow" />
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 transition hover:text-emerald-300"
+            className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-secondary transition hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to overview
           </Link>
 
-          <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+          <div className="mt-6 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="eyebrow">Latest resume</p>
-              <h1 className="mt-4 text-5xl font-semibold tracking-[-0.045em] sm:text-6xl">
+              <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
                 Experience at a glance.
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-                The document below always displays the latest version uploaded
-                to the same Google Drive file.
+              <p className="mt-4 max-w-2xl leading-7 text-body">
+                View my latest resume or download a PDF to keep.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
-                href={resumeDownloadUrl}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-5 py-3 font-bold text-slate-950"
-              >
-                <Download className="h-4 w-4" aria-hidden="true" />
-                Download PDF
-              </a>
-              <a
                 href={resumeViewUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 font-semibold text-white"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-action px-5 py-3 font-bold text-on-action"
               >
-                Open in new tab
+                Open resume
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href={resumeDownloadUrl}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-line bg-tint px-5 py-3 font-semibold text-foreground"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                Download PDF
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl px-3 sm:px-8">
-          <div className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl shadow-black/10">
-            <div className="flex items-center gap-2 border-b border-white/10 px-5 py-3 text-sm text-slate-400">
-              <FileText className="h-4 w-4 text-emerald-300" aria-hidden="true" />
-              Shreyas Rasaikar — Resume
-            </div>
-            <iframe
-              src={resumePreviewUrl}
-              title="Shreyas Rasaikar resume preview"
-              className="h-[78vh] min-h-[560px] w-full bg-white"
-              allow="autoplay"
-            />
-          </div>
+      <section className="py-8 sm:py-12">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <ResumePreview src={resumePreviewUrl} viewUrl={resumeViewUrl} />
 
-          <p className="mt-5 text-center text-sm text-slate-500">
+          <p className="mt-5 text-center text-sm text-secondary">
             If the embedded viewer does not load,{" "}
             <a
               href={resumeViewUrl}
               target="_blank"
               rel="noreferrer"
-              className="font-semibold text-emerald-300 hover:underline"
+              className="font-semibold text-accent underline underline-offset-4"
             >
               open the resume in Google Drive
             </a>
@@ -102,8 +83,6 @@ export default function ResumePage() {
           </p>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

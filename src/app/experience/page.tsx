@@ -4,13 +4,10 @@ import {
   ArrowLeft,
   ArrowUpRight,
   BriefcaseBusiness,
-  Check,
   GraduationCap,
-  Layers3,
   MapPin,
 } from "lucide-react";
-import Footer from "@/components/footer";
-import Navbar from "@/components/navbar";
+import ProfessionalWork from "@/components/professional-work";
 import { education, experiences } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -27,15 +24,17 @@ const careerSignals = [
 
 export default function ExperiencePage() {
   return (
-    <main id="top" className="min-h-screen overflow-hidden bg-slate-950 text-white">
-      <Navbar />
-
-      <section className="relative isolate border-b border-white/5 pb-20 pt-36">
+    <main
+      id="main-content"
+      tabIndex={-1}
+      className="min-h-screen bg-page text-foreground"
+    >
+      <section className="relative isolate border-b border-line pb-12 pt-28 sm:pb-16 sm:pt-32">
         <div className="absolute inset-0 -z-10 grid-glow" />
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 transition hover:text-emerald-300"
+            className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-secondary transition hover:text-accent"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to overview
@@ -44,22 +43,22 @@ export default function ExperiencePage() {
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_.55fr] lg:items-end">
             <div>
               <p className="eyebrow">Professional experience</p>
-              <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl">
+              <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-[1.1] tracking-tight sm:text-6xl">
                 Building reliable products across the{" "}
-                <span className="text-emerald-300">full stack.</span>
+                <span className="text-accent">full stack.</span>
               </h1>
-              <p className="mt-7 max-w-3xl text-lg leading-8 text-slate-300">
+              <p className="mt-7 max-w-3xl text-lg leading-8 text-body">
                 My work has progressed from software quality and traditional web
                 applications to owning real-time B2B integrations, shared data
                 architectures and operational interfaces.
               </p>
             </div>
 
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-tint-strong sm:grid-cols-3 lg:grid-cols-1">
               {careerSignals.map((signal) => (
-                <div key={signal.value} className="bg-slate-950/90 px-5 py-4">
-                  <p className="font-semibold text-white">{signal.value}</p>
-                  <p className="mt-1 text-xs text-slate-400">{signal.label}</p>
+                <div key={signal.value} className="bg-page/90 px-5 py-4">
+                  <p className="font-semibold text-foreground">{signal.value}</p>
+                  <p className="mt-1 text-xs text-secondary">{signal.label}</p>
                 </div>
               ))}
             </div>
@@ -67,38 +66,40 @@ export default function ExperiencePage() {
         </div>
       </section>
 
-      <section className="py-24">
+      <section aria-label="Career history" className="py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-5 sm:px-8">
           <div className="space-y-10">
             {experiences.map((experience, index) => (
               <article
                 key={experience.company}
-                className="overflow-hidden rounded-3xl border border-white/10 bg-slate-900/65"
+                className={`border-t border-line ${index === 0 ? "border-l-2 border-l-accent bg-subtle pl-5 sm:pl-8" : ""}`}
               >
-                <header className="grid gap-7 border-b border-white/10 p-7 sm:p-9 lg:grid-cols-[.34fr_1fr]">
+                <header className="grid gap-5 pt-8 lg:grid-cols-[.34fr_1fr] lg:gap-10">
                   <div>
-                    <p className="font-semibold text-emerald-300">
-                      {experience.period}
-                    </p>
-                    <p className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <p className="font-semibold text-accent">
+                        {experience.period}
+                      </p>
+                      {index === 0 && (
+                        <span className="inline-flex rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                          Current role
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-3 flex items-center gap-2 text-sm text-secondary">
                       <MapPin className="h-4 w-4" aria-hidden="true" />
                       {experience.location}
                     </p>
-                    {index === 0 && (
-                      <span className="mt-5 inline-flex rounded-full bg-emerald-300/10 px-3 py-1 text-xs font-bold text-emerald-300">
-                        Current role
-                      </span>
-                    )}
                   </div>
 
                   <div>
                     <div className="flex items-start gap-3">
                       <BriefcaseBusiness
-                        className="mt-1 h-5 w-5 shrink-0 text-slate-500"
+                        className="mt-1 h-5 w-5 shrink-0 text-secondary"
                         aria-hidden="true"
                       />
                       <div>
-                        <p className="text-sm text-slate-400">
+                        <p className="text-sm text-secondary">
                           {experience.company}
                         </p>
                         <h2 className="mt-1 text-3xl font-semibold tracking-tight">
@@ -106,118 +107,133 @@ export default function ExperiencePage() {
                         </h2>
                       </div>
                     </div>
-                    <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
+                    <p className="mt-6 max-w-3xl text-lg leading-8 text-body">
                       {experience.summary}
                     </p>
                   </div>
                 </header>
 
-                <div className="grid gap-10 p-7 sm:p-9 lg:grid-cols-[.72fr_1.28fr]">
-                  <div>
-                    <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-emerald-300">
-                      <Check className="h-4 w-4" aria-hidden="true" />
-                      Key contributions
-                    </p>
-                    <ul className="mt-5 space-y-4">
-                      {experience.achievements.map((achievement) => (
-                        <li
-                          key={achievement}
-                          className="flex gap-3 text-sm leading-6 text-slate-300"
-                        >
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300" />
-                          {achievement}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {experience.selectedWork?.length ? (
+                <div className="mt-8 grid gap-8 pb-8 lg:grid-cols-[.34fr_1fr] lg:gap-10">
+                  <div className="lg:col-start-2">
                     <div>
-                      <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-violet-300">
-                        <Layers3 className="h-4 w-4" aria-hidden="true" />
-                        Selected work
-                      </p>
-                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                        {experience.selectedWork.map((work) => (
-                          <div
-                            key={work.title}
-                            className="rounded-2xl border border-white/10 bg-white/[.03] p-5"
+                      <h3 className="text-lg font-semibold">
+                        Key contributions
+                      </h3>
+                      <ul className="mt-4 max-w-3xl space-y-3">
+                        {experience.achievements.map((achievement) => (
+                          <li
+                            key={achievement}
+                            className="flex gap-3 leading-7 text-body"
                           >
-                            <h3 className="font-semibold text-white">
-                              {work.title}
-                            </h3>
-                            <p className="mt-2 text-sm leading-6 text-slate-400">
-                              {work.description}
-                            </p>
-                          </div>
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-action" />
+                            {achievement}
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     </div>
-                  ) : null}
-                </div>
 
-                <footer className="flex flex-wrap gap-2 border-t border-white/10 px-7 py-5 sm:px-9">
-                  {experience.stack.map((technology) => (
-                    <span
-                      key={technology}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
-                    >
-                      {technology}
-                    </span>
-                  ))}
-                </footer>
+                    {experience.selectedWork?.length ? (
+                      <section
+                        className="mt-8 border-t border-line pt-6"
+                        aria-labelledby={`selected-work-${index}`}
+                      >
+                        <h3
+                          id={`selected-work-${index}`}
+                          className="text-lg font-semibold"
+                        >
+                          Associated work
+                          <span className="sr-only"> at {experience.company}</span>
+                        </h3>
+                        <div className="mt-4 divide-y divide-line">
+                          {experience.selectedWork.map((work) => (
+                            <div
+                              key={work.title}
+                              className="py-4 first:pt-0 last:pb-0"
+                            >
+                              <h4 className="font-semibold text-foreground">
+                                {work.slug ? (
+                                  <Link
+                                    href={"/projects/" + work.slug}
+                                    className="inline-flex min-h-11 items-center gap-2 underline decoration-accent/40 underline-offset-4 hover:text-accent"
+                                  >
+                                    {work.title}
+                                    <ArrowUpRight
+                                      className="h-4 w-4 shrink-0"
+                                      aria-hidden="true"
+                                    />
+                                  </Link>
+                                ) : (
+                                  work.title
+                                )}
+                              </h4>
+                              <p className="mt-2 max-w-3xl leading-7 text-secondary">
+                                {work.description}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                    ) : null}
+                    <dl className="mt-8 border-t border-line pt-5">
+                      <dt className="text-sm font-semibold">Technologies used</dt>
+                      <dd className="mt-2 leading-7 text-secondary">
+                        {experience.stack.join(", ")}
+                      </dd>
+                    </dl>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-y border-white/5 bg-slate-900/35 py-20">
+      <ProfessionalWork />
+
+      <section className="border-y border-line bg-subtle py-12 sm:py-20">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 sm:px-8 md:grid-cols-[.3fr_1fr] md:items-center">
-          <div className="grid h-20 w-20 place-items-center rounded-2xl border border-emerald-300/20 bg-emerald-300/10">
-            <GraduationCap className="h-9 w-9 text-emerald-300" aria-hidden="true" />
+          <div className="grid h-20 w-20 place-items-center rounded-2xl border border-accent/20 bg-accent/10">
+            <GraduationCap className="h-9 w-9 text-accent" aria-hidden="true" />
           </div>
           <div>
             <p className="eyebrow">Education</p>
             <h2 className="mt-3 text-2xl font-semibold">
               {education.qualification}
             </h2>
-            <p className="mt-2 text-slate-400">
+            <p className="mt-2 text-secondary">
               {education.institution} · {education.period} · {education.result}
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-24">
+      <section className="py-16 sm:py-20">
         <div className="mx-auto max-w-4xl px-5 text-center sm:px-8">
           <p className="eyebrow">Continue exploring</p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight">
+          <h2 className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
             See the systems behind the experience.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl leading-7 text-slate-400">
+          <p className="mx-auto mt-5 max-w-2xl leading-7 text-secondary">
             Explore selected professional work and full-stack projects, or get
             in touch to discuss the engineering decisions in more detail.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link
               href="/projects"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3.5 font-bold text-slate-950"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-action px-6 py-3.5 font-bold text-on-action"
             >
               View selected work
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               href="/#contact"
-              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold text-white"
+              className="inline-flex items-center justify-center rounded-full border border-line bg-tint px-6 py-3.5 font-semibold text-foreground"
             >
               Contact me
             </Link>
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

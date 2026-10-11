@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <title>Workforce Operations scheduling rules</title>
+  <desc>Organisation-scoped scheduling enforces team, role, capacity, overlap, availability and approved leave checks before assignment, and records operational changes in an audit history. Illustrated overview, not a product screenshot.</desc>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#4338ca" stroke-width="2"/></marker></defs>
+  <rect width="960" height="600" fill="#eef2ff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="65" font-size="28" font-weight="700" fill="#4338ca">WORKFORCE OPERATIONS / SCHEDULING</text>
+    <text x="48" y="118" font-size="42" font-weight="700" fill="#1e1b4b">A shift must satisfy the rules.</text>
+    <rect x="48" y="161" width="864" height="64" rx="16" fill="#312e81"/>
+    <text x="480" y="202" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">Organisation scope + role permissions</text>
+    <rect x="48" y="255" width="560" height="212" rx="20" fill="#fff" stroke="#a5b4fc" stroke-width="2"/>
+    <text x="72" y="297" font-size="29" font-weight="700" fill="#1e1b4b">Assignment checks</text>
+    <path d="M72 314H584" stroke="#c7d2fe" stroke-width="2"/>
+    <text x="72" y="353" font-size="26" fill="#454671">Team + worker role</text>
+    <text x="342" y="353" font-size="26" fill="#454671">Capacity</text>
+    <text x="72" y="399" font-size="26" fill="#454671">Availability</text>
+    <text x="342" y="399" font-size="26" fill="#454671">Overlap</text>
+    <text x="72" y="444" font-size="26" fill="#454671">Approved leave</text>
+    <text x="342" y="444" font-size="26" fill="#454671">Duplicates</text>
+    <rect x="672" y="255" width="240" height="212" rx="20" fill="#fff" stroke="#a5b4fc" stroke-width="2"/>
+    <path d="M613 360H654" stroke="#4338ca" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+    <text x="792" y="327" text-anchor="middle" font-size="29" font-weight="700" fill="#1e1b4b">Assign shift</text>
+    <text x="792" y="374" text-anchor="middle" font-size="25" fill="#454671">Server-enforced</text>
+    <text x="792" y="410" text-anchor="middle" font-size="25" fill="#454671">constraints</text>
+    <rect x="48" y="497" width="864" height="60" rx="16" fill="#e0e7ff"/>
+    <text x="480" y="536" text-anchor="middle" font-size="28" font-weight="700" fill="#312e81">Audit history for operational changes</text>
+  </g>
+</svg>

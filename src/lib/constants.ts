@@ -1,4 +1,47 @@
-export type ProjectImage = { src: string; alt: string };
+export type ProjectCover = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption: string;
+};
+
+export type ProjectScreenshot = ProjectCover & {
+  id: string;
+  type: "screenshot";
+  section: "gallery" | "workflows" | "decisions";
+  order?: number;
+};
+
+export type ProjectDiagram = ProjectCover & {
+  id: string;
+  type: "diagram";
+  section: "architecture" | "workflows" | "decisions";
+  order?: number;
+  explanation: string;
+  expandedSrc?: string;
+  expanded?: Pick<ProjectCover, "src" | "alt" | "width" | "height">;
+  legend?: { symbol: string; meaning: string }[];
+};
+
+export type ProjectVideo = {
+  id: string;
+  type: "video";
+  section: "walkthrough";
+  order?: number;
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  title: string;
+  caption: string;
+  duration: string;
+  steps: string[];
+  captions?: { src: string; language: string; label: string }[];
+  transcript?: string;
+};
+
+export type ProjectMedia = ProjectScreenshot | ProjectDiagram | ProjectVideo;
 
 export type Experience = {
   title: string;
@@ -11,10 +54,12 @@ export type Experience = {
   selectedWork?: {
     title: string;
     description: string;
+    slug?: string;
   }[];
 };
 
 export type CaseStudy = {
+  slug: string;
   title: string;
   context: string;
   summary: string;
@@ -24,7 +69,8 @@ export type CaseStudy = {
   stack: string[];
   accent: "violet" | "emerald" | "amber";
   icon: "architecture" | "realtime" | "reliability";
-  images?: ProjectImage[];
+  cover?: ProjectCover;
+  media?: ProjectMedia[];
 };
 
 export type IndependentProject = {
@@ -36,7 +82,8 @@ export type IndependentProject = {
   stack: string[];
   repository: string;
   demo?: string;
-  images?: ProjectImage[];
+  cover?: ProjectCover;
+  media?: ProjectMedia[];
   problem: string;
   solution: string;
   users: {
@@ -57,8 +104,27 @@ export type IndependentProject = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: "unified-multi-sport-architecture",
     title: "Unified multi-sport architecture",
+    cover: {
+      src: "/projects/multi-sport-cover.svg",
+      alt: "Seven-plus combat sports share a sport-type data model, NestJS APIs and React interfaces.",
+      width: 960,
+      height: 600,
+      caption: "Shared architecture · reconstructed overview",
+    },
     context: "Octalogic Tech - B2B sports data",
+    media: [{
+      id: "shared-sports-model",
+      type: "diagram",
+      section: "architecture",
+      src: "/projects/multi-sport-cover.svg",
+      alt: "Seven-plus sports use a sport-type discriminator with shared PostgreSQL entities, NestJS APIs and React interfaces.",
+      width: 960,
+      height: 600,
+      caption: "Shared multi-sport model - reconstructed overview",
+      explanation: "A sport-type discriminator preserves sport-specific behaviour within shared entities for events, participants, scores, markets and odds. NestJS services and React interfaces reuse that common structure. This is a reconstructed overview based on the case study, rather than an internal system diagram.",
+    }],
     summary:
       "A shared platform for managing events, participants, scores, markets and odds across seven-plus combat sports.",
     role:
@@ -72,6 +138,14 @@ export const caseStudies: CaseStudy[] = [
     icon: "architecture",
   },
   {
+    slug: "real-time-table-tennis-integration",
+    cover: {
+      src: "/projects/table-tennis-cover.svg",
+      alt: "Provider schedules and scores flow through transactional synchronisation to live trading and settlement workflows.",
+      width: 960,
+      height: 600,
+      caption: "Live match workflow · reconstructed overview",
+    },
     title: "Real-time table tennis integration",
     context: "Octalogic Tech - End-to-end integration",
     summary:
@@ -87,6 +161,14 @@ export const caseStudies: CaseStudy[] = [
     icon: "realtime",
   },
   {
+    slug: "resilient-external-data-services",
+    cover: {
+      src: "/projects/provider-reliability-cover.svg",
+      alt: "Concurrent requests share memory and Redis token caching, with pre-expiry refresh, rate-aware retries and heartbeat-triggered resynchronisation.",
+      width: 960,
+      height: 600,
+      caption: "Provider reliability patterns · reconstructed overview",
+    },
     title: "Resilient external data services",
     context: "Octalogic Tech - Reliability engineering",
     summary:
@@ -120,16 +202,19 @@ export const experiences: Experience[] = [
     selectedWork: [
       {
         title: "Shared combat-sports architecture",
+        slug: "unified-multi-sport-architecture",
         description:
           "Consolidated seven-plus sports into shared PostgreSQL schemas, TypeORM entities, NestJS services and React interfaces using a sport-type discriminator.",
       },
       {
         title: "Major League Table Tennis",
+        slug: "real-time-table-tennis-integration",
         description:
           "Owned the integration from paginated external APIs and transactional synchronisation through live scores, settlement, publishing and the trader-facing interface.",
       },
       {
         title: "External API reliability",
+        slug: "resilient-external-data-services",
         description:
           "Designed memory and Redis token caching, concurrency control, pre-expiry refresh and rate-aware retry behaviour for OAuth-protected providers.",
       },
@@ -252,6 +337,24 @@ export const skillGroups = [
 export const independentProjects: IndependentProject[] = [
   {
     slug: "citeleaf",
+    media: [{
+      id: "notebook-evidence-flow",
+      type: "diagram",
+      section: "architecture",
+      src: "/projects/citeleaf-cover.svg",
+      alt: "PDF and text documents, websites, YouTube captions and VTT transcripts feed notebook-scoped hybrid retrieval and inspectable citations.",
+      width: 960,
+      height: 600,
+      caption: "Notebook-scoped evidence flow - illustrated overview",
+      explanation: "Sources are extracted, chunked and indexed within an isolated notebook. Vector and full-text retrieval select bounded evidence for an answer; the server maps each citation to a real retrieved source chunk. Saved conversations retain citation snapshots so the evidence remains inspectable.",
+    }],
+    cover: {
+      src: "/projects/citeleaf-cover.svg",
+      alt: "Citeleaf brings documents, websites and video transcripts into a notebook to produce answers with inspectable source citations.",
+      width: 960,
+      height: 600,
+      caption: "Research evidence flow · illustrated overview",
+    },
     title: "Citeleaf",
     context: "AI-powered research workspace",
     description:
@@ -351,6 +454,24 @@ export const independentProjects: IndependentProject[] = [
   },
   {
     slug: "staymate",
+    media: [{
+      id: "booking-state-flow",
+      type: "diagram",
+      section: "architecture",
+      src: "/projects/staymate-cover.svg",
+      alt: "Property discovery leads to Stripe test checkout and webhook-confirmed bookings, followed by host operations and booking-linked messages.",
+      width: 960,
+      height: 600,
+      caption: "Booking state connects payment and communication - illustrated overview",
+      explanation: "Guests discover listings and initiate Stripe test-mode checkout. The backend confirms booking state through the payment webhook rather than a browser redirect. Confirmed booking relationships then determine messaging access while hosts operate reservations and availability.",
+    }],
+    cover: {
+      src: "/projects/staymate-cover.svg",
+      alt: "StayMate connects guest discovery and checkout to webhook-confirmed bookings, host operations and booking-linked messaging.",
+      width: 960,
+      height: 600,
+      caption: "Booking workflow · illustrated overview",
+    },
     title: "StayMate",
     context: "Full-stack rental marketplace",
     description:
@@ -434,6 +555,13 @@ export const independentProjects: IndependentProject[] = [
   },
   {
     slug: "workforce-operations",
+    cover: {
+      src: "/projects/workforce-cover.svg",
+      alt: "Organisation-scoped shifts pass team, capacity, overlap, availability and leave checks before assignment, with an audit history of operational changes.",
+      width: 960,
+      height: 600,
+      caption: "Scheduling rules · illustrated overview",
+    },
     title: "Workforce Operations",
     context: "Multi-tenant scheduling platform",
     description:
@@ -517,6 +645,13 @@ export const independentProjects: IndependentProject[] = [
   },
   {
     slug: "food-delivery-platform",
+    cover: {
+      src: "/projects/food-delivery-cover.svg",
+      alt: "Customised menu items and coupons lead to delivery-zone validation, Razorpay or cash-on-delivery checkout, and admin order fulfilment.",
+      width: 960,
+      height: 600,
+      caption: "Order lifecycle · illustrated overview",
+    },
     title: "Food Delivery Platform",
     context: "Full-stack ordering and operations",
     description:

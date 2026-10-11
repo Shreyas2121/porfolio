@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <title>Citeleaf research evidence flow</title>
+  <desc>Documents, websites and video transcripts are indexed in isolated notebooks. Hybrid retrieval produces grounded answers with inspectable citations. Illustrated workflow, not a product screenshot.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#047857" stroke-width="2"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="#f0fdf4"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="65" font-size="28" font-weight="700" fill="#047857">CITELEAF / RESEARCH WORKSPACE</text>
+    <text x="48" y="118" font-size="42" font-weight="700" fill="#14332a">From source material to evidence.</text>
+    <g fill="#fff" stroke="#a7d8ba" stroke-width="2">
+      <rect x="48" y="190" width="238" height="84" rx="16"/>
+      <rect x="48" y="292" width="238" height="84" rx="16"/>
+      <rect x="48" y="394" width="238" height="84" rx="16"/>
+    </g>
+    <g font-size="29" font-weight="700" fill="#14532d" text-anchor="middle">
+      <text x="167" y="241">PDF + text</text>
+      <text x="167" y="343">Websites</text>
+      <text x="167" y="430">YouTube</text>
+      <text x="167" y="464" font-size="25" font-weight="400">+ VTT transcripts</text>
+    </g>
+    <path d="M288 232H310V334H352 M288 334H352 M288 436H310V334" fill="none" stroke="#047857" stroke-width="3"/>
+    <path d="M330 334H358 M614 334H665" fill="none" stroke="#047857" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="374" y="205" width="240" height="258" rx="28" fill="#14532d"/>
+    <path d="M447 250H525V292H447Z M464 251V291" fill="none" stroke="#bbf7d0" stroke-width="4"/>
+    <text x="494" y="341" text-anchor="middle" font-size="32" font-weight="700" fill="#fff">Notebook</text>
+    <text x="494" y="382" text-anchor="middle" font-size="26" fill="#dcfce7">Hybrid retrieval</text>
+    <text x="494" y="423" text-anchor="middle" font-size="25" fill="#dcfce7">Isolated evidence</text>
+    <rect x="682" y="205" width="230" height="258" rx="20" fill="#fff" stroke="#a7d8ba" stroke-width="2"/>
+    <text x="708" y="253" font-size="30" font-weight="700" fill="#14332a">Answer</text>
+    <path d="M709 282H879 M709 303H879 M709 324H846" stroke="#bbd5c5" stroke-width="7" stroke-linecap="round"/>
+    <rect x="708" y="355" width="177" height="43" rx="10" fill="#dcfce7"/>
+    <text x="797" y="384" text-anchor="middle" font-size="25" font-weight="700" fill="#14532d">[1] Source</text>
+    <text x="708" y="435" font-size="25" fill="#315b46">Inspect citations</text>
+    <path d="M48 519H912" stroke="#a7d8ba" stroke-width="2"/>
+    <text x="48" y="559" font-size="28" fill="#315b46">Sources stay traceable across saved conversations.</text>
+  </g>
+</svg>

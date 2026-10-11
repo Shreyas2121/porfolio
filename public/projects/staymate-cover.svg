@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <title>StayMate booking workflow</title>
+  <desc>Guests discover listings and use Stripe test checkout. A payment webhook confirms bookings, connecting host operations and booking-linked messaging. Illustrated workflow, not a product screenshot.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#0369a1" stroke-width="2"/></marker>
+  </defs>
+  <rect width="960" height="600" fill="#f0f9ff"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="48" y="65" font-size="28" font-weight="700" fill="#0369a1">STAYMATE / RENTAL MARKETPLACE</text>
+    <text x="48" y="118" font-size="42" font-weight="700" fill="#0c334a">A booking connects the product.</text>
+    <rect x="48" y="169" width="250" height="211" rx="20" fill="#fff" stroke="#a5cee5" stroke-width="2"/>
+    <path d="M139 219L173 191L207 219V254H139Z M164 254V232H182V254" fill="none" stroke="#0369a1" stroke-width="4" stroke-linejoin="round"/>
+    <text x="173" y="304" text-anchor="middle" font-size="32" font-weight="700" fill="#0c334a">Discover</text>
+    <text x="173" y="349" text-anchor="middle" font-size="27" fill="#365a70">Guest listings</text>
+    <rect x="355" y="169" width="250" height="211" rx="20" fill="#fff" stroke="#a5cee5" stroke-width="2"/>
+    <rect x="443" y="207" width="74" height="49" rx="7" fill="none" stroke="#0369a1" stroke-width="4"/>
+    <path d="M444 222H516" stroke="#0369a1" stroke-width="4"/>
+    <text x="480" y="304" text-anchor="middle" font-size="32" font-weight="700" fill="#0c334a">Checkout</text>
+    <text x="480" y="349" text-anchor="middle" font-size="27" fill="#365a70">Stripe test mode</text>
+    <rect x="662" y="169" width="250" height="211" rx="20" fill="#0c4a6e"/>
+    <circle cx="787" cy="232" r="29" fill="none" stroke="#bae6fd" stroke-width="4"/>
+    <path d="M773 232L783 242L802 222" fill="none" stroke="#bae6fd" stroke-width="4" stroke-linecap="round"/>
+    <text x="787" y="304" text-anchor="middle" font-size="32" font-weight="700" fill="#fff">Confirmed</text>
+    <text x="787" y="349" text-anchor="middle" font-size="27" fill="#e0f2fe">Payment webhook</text>
+    <path d="M300 276H340 M607 276H647" fill="none" stroke="#0369a1" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M787 382V419H256V459 M787 419H704V459" fill="none" stroke="#0369a1" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M256 439V459" stroke="#0369a1" stroke-width="3" marker-end="url(#arrow)"/>
+    <rect x="48" y="478" width="417" height="79" rx="18" fill="#fff" stroke="#a5cee5" stroke-width="2"/>
+    <text x="256" y="526" text-anchor="middle" font-size="30" font-weight="700" fill="#0c334a">Host operations</text>
+    <rect x="495" y="478" width="417" height="79" rx="18" fill="#fff" stroke="#a5cee5" stroke-width="2"/>
+    <text x="703" y="526" text-anchor="middle" font-size="29" font-weight="700" fill="#0c334a">Booking-linked messages</text>
+  </g>
+</svg>

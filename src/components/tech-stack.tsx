@@ -1,4 +1,30 @@
-import { skillGroups } from "@/lib/constants";
-import { Boxes, Code2, Container, Database } from "lucide-react";
-const icons=[Code2,Boxes,Database,Container];
-export default function TechStack(){return <section id="skills" className="scroll-mt-20 border-y border-white/5 bg-slate-900/35 py-24"><div className="mx-auto max-w-7xl px-5 sm:px-8"><p className="eyebrow">Capabilities</p><div className="mt-4 grid gap-6 lg:grid-cols-2 lg:items-end"><h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">A practical stack for delivering complete products.</h2><p className="max-w-xl text-slate-400 lg:justify-self-end">Grouped by where I use each skill, without arbitrary proficiency percentages.</p></div><div className="mt-12 grid gap-5 sm:grid-cols-2">{skillGroups.map((group,index)=>{const Icon=icons[index];return <article key={group.label} className="rounded-2xl border border-white/10 bg-slate-950/60 p-6"><Icon className="h-7 w-7 text-emerald-300"/><h3 className="mt-5 text-xl font-semibold">{group.label}</h3><div className="mt-5 flex flex-wrap gap-2">{group.items.map(item=><span key={item} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-300">{item}</span>)}</div></article>})}</div></div></section>}
+﻿import { skillGroups } from "@/lib/constants";
+
+export default function TechStack() {
+  return (
+    <section
+      id="skills"
+      tabIndex={-1}
+      className="scroll-mt-20 border-y border-line bg-subtle py-12 sm:py-16"
+    >
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:grid lg:grid-cols-[.65fr_1.35fr] lg:gap-16">
+        <div>
+          <p className="eyebrow">Capabilities</p>
+          <h2 className="mt-4 max-w-md text-2xl font-semibold tracking-tight sm:text-3xl">
+            A practical stack for delivering complete products.
+          </h2>
+        </div>
+        <dl className="mt-8 grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:mt-0">
+          {skillGroups.map((group) => (
+            <div key={group.label} className="border-t border-line pt-4">
+              <dt className="font-semibold">{group.label}</dt>
+              <dd className="mt-3 leading-7 text-secondary">
+                {group.items.join(", ")}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}

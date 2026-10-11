@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+Project records, media asset instructions and browser verification are documented
+in [Project media](docs/project-media.md).
+
+Accessibility checks, responsive acceptance results and local production loading
+samples are documented in [Section 9 verification](docs/accessibility-responsive-verification.md).
+
 ## Getting Started
 
 First, run the development server:
@@ -16,9 +22,9 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Typography uses the system font stack defined in `src/app/globals.css`, without a separate font download.
 
 ## Learn More
 

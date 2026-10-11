@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -56,8 +58,16 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="antialiased">
+      <body id="top" className="antialiased">
+        <a
+          href="#main-content"
+          className="fixed left-5 top-4 z-[100] -translate-y-24 rounded-lg bg-action px-5 py-3 font-semibold text-on-action focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
+        <Navbar />
         {children}
+        <Footer />
         <Analytics />
         <script
           type="application/ld+json"

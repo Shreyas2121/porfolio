@@ -1,36 +1,52 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownRight, Download, MapPin } from "lucide-react";
+import { ArrowDownRight, FileText, MapPin } from "lucide-react";
 import image from "../assests/image.avif";
 
 const signals = [
   ["Nearly 4 years", "Product engineering"],
   ["Real time", "Data and WebSockets"],
-  ["End to end", "Architecture to interface"],
+  ["Full stack", "Data model to interface"],
 ];
 
 export default function Hero() {
-  return <section id="top" className="relative isolate min-h-[92vh] pt-28">
-    <div className="absolute inset-0 -z-10 grid-glow"/>
-    <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-16 pt-14 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:pb-24 lg:pt-24">
-      <div>
-        <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-300/20 bg-emerald-300/5 px-3 py-1.5 text-sm text-emerald-200"><span className="h-2 w-2 rounded-full bg-emerald-300"/>Full-stack developer</div>
-        <h1 className="max-w-4xl text-5xl font-semibold leading-[1.04] tracking-[-0.045em] sm:text-6xl lg:text-7xl">I build real-time products from <span className="text-emerald-300">data model to interface.</span></h1>
-        <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">I&apos;m Shreyas, a full-stack developer with nearly four years of experience building B2B platforms and customer-facing products using TypeScript, React, NestJS, PostgreSQL and Redis.</p>
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <Link href="#work" className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-300 px-6 py-3.5 font-bold text-slate-950">See selected work<ArrowDownRight className="h-5 w-5"/></Link>
-          <Link href="/resume" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3.5 font-semibold"><Download className="h-5 w-5"/>View resume</Link>
+  return (
+    <section className="relative isolate pt-20">
+      <div className="mx-auto grid max-w-6xl items-center gap-6 px-5 pb-8 pt-5 sm:gap-8 sm:px-8 sm:py-10 lg:grid-cols-[1.2fr_.8fr] lg:gap-12 lg:py-10">
+        <div>
+          <p className="eyebrow">Full-stack developer</p>
+          <h1 className="mt-3 max-w-[18ch] text-[2rem] font-semibold leading-[1.12] tracking-[-0.045em] sm:text-4xl lg:text-[3.25rem] xl:text-6xl">
+            I build real-time products from <span className="text-accent">data model to interface.</span>
+          </h1>
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Link href="#work" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-action px-5 py-3 font-bold text-on-action">
+              See selected work<ArrowDownRight className="h-5 w-5" aria-hidden="true" />
+            </Link>
+            <Link href="/resume" className="inline-flex min-h-11 items-center justify-center gap-2 px-1 py-2 text-sm font-semibold text-body transition hover:text-accent">
+              <FileText className="h-5 w-5" aria-hidden="true" />View resume
+            </Link>
+          </div>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
+            I&apos;m Shreyas, a full-stack developer with nearly four years of experience building B2B platforms and customer-facing products using TypeScript, React, NestJS, PostgreSQL and Redis.
+          </p>
+          <dl className="mt-5 grid max-w-2xl grid-cols-3 gap-3 border-t border-line pt-4">
+            {signals.map(([value, label]) => <div key={value}>
+              <dt className="text-sm font-semibold sm:text-base">{value}</dt>
+              <dd className="mt-1 text-xs leading-5 text-secondary">{label}</dd>
+            </div>)}
+          </dl>
         </div>
-        <div className="mt-12 grid max-w-2xl gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">{signals.map(([value,label])=><div key={value} className="bg-slate-950/85 px-5 py-4"><p className="font-semibold">{value}</p><p className="mt-1 text-xs text-slate-400">{label}</p></div>)}</div>
+        <figure className="relative flex w-full items-center gap-5 sm:gap-6 lg:mx-auto lg:block lg:max-w-xs xl:max-w-sm">
+          <div className="relative aspect-[4/5] w-28 shrink-0 overflow-hidden rounded-2xl border border-line bg-surface sm:w-36 lg:w-full">
+            <Image src={image} alt="Shreyas Rasaikar" fill priority sizes="(min-width: 1280px) 384px, (min-width: 1024px) 320px, (min-width: 640px) 144px, 112px" className="object-cover object-top" />
+            <div className="absolute inset-x-0 bottom-0 hidden h-1/2 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent lg:block" />
+          </div>
+          <figcaption className="hero-photo-caption max-w-60 text-body lg:absolute lg:inset-x-5 lg:bottom-5 lg:max-w-none lg:rounded-xl lg:bg-[#020617] lg:p-3">
+            <p className="text-sm leading-6">Backend correctness. Clear interfaces. Reliable delivery.</p>
+            <p className="mt-2 flex items-center gap-1.5 text-xs"><MapPin className="h-3.5 w-3.5" aria-hidden="true" />Goa, India</p>
+          </figcaption>
+        </figure>
       </div>
-      <div className="relative mx-auto w-full max-w-md">
-        <div className="absolute -inset-7 rounded-[2.5rem] bg-gradient-to-br from-violet-500/20 to-emerald-300/20 blur-2xl"/>
-        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900 p-3"><div className="relative aspect-[4/5] overflow-hidden rounded-[1.45rem]">
-          <Image src={image} alt="Shreyas Rasaikar" fill priority sizes="(max-width:1024px) 90vw,420px" className="object-cover object-top"/>
-          <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950"/>
-          <div className="photo-overlay absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-slate-950/75 p-4 backdrop-blur-xl"><p className="text-sm font-semibold">Backend correctness. Clear interfaces. Reliable delivery.</p><p className="mt-1 flex items-center gap-1.5 text-xs text-slate-300"><MapPin className="h-3.5 w-3.5 text-emerald-300"/>Goa, India</p></div>
-        </div></div>
-      </div>
-    </div>
-  </section>;
+    </section>
+  );
 }
