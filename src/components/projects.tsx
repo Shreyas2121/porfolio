@@ -4,8 +4,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const featuredWork = [
+  independentProjects[0],
   ...caseStudies.slice(0, 1),
-  ...independentProjects.filter((project) => ["citeleaf", "staymate"].includes(project.slug)),
+  ...independentProjects.filter((project) => project.slug === "citeleaf"),
 ];
 
 export default function Projects() {

@@ -25,7 +25,7 @@ export default function WorkCard({
       aria-labelledby={`work-${project.slug}`}
       className={
         "flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface " +
-        (featured ? "md:col-span-2 lg:grid lg:grid-cols-2" : "")
+        (featured ? "md:col-span-2 " + (project.cover ? "lg:grid lg:grid-cols-2" : "") : "")
       }
     >
       {project.cover && (

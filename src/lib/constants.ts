@@ -1,3 +1,5 @@
+import { pizzaStore } from "@/lib/pizza-store";
+
 export type ProjectCover = {
   src: string;
   alt: string;
@@ -99,6 +101,8 @@ export type IndependentProject = {
     title: string;
     description: string;
   }[];
+  workflows?: { title: string; description: string }[];
+  evidence?: { title: string; description: string; href: string; label: string }[];
   limitations: string[];
 };
 
@@ -335,6 +339,7 @@ export const skillGroups = [
 ];
 
 export const independentProjects: IndependentProject[] = [
+  pizzaStore,
   {
     slug: "citeleaf",
     media: [{
@@ -641,105 +646,6 @@ export const independentProjects: IndependentProject[] = [
       "Shift swaps and real-time schedule updates are not currently implemented.",
       "Optimistic concurrency and idempotent write handling remain future reliability improvements.",
       "Production schema evolution should replace development-time TypeORM synchronisation with migrations.",
-    ],
-  },
-  {
-    slug: "food-delivery-platform",
-    cover: {
-      src: "/projects/food-delivery-cover.svg",
-      alt: "Customised menu items and coupons lead to delivery-zone validation, Razorpay or cash-on-delivery checkout, and admin order fulfilment.",
-      width: 960,
-      height: 600,
-      caption: "Order lifecycle · illustrated overview",
-    },
-    title: "Food Delivery Platform",
-    context: "Full-stack ordering and operations",
-    description:
-      "A complete food-ordering product with configurable menu items, cart and coupon flows, serviceable delivery zones, Razorpay payments and an administration dashboard.",
-    highlights: [
-      "Product customisation through configurable add-on groups",
-      "Online Razorpay payments and cash-on-delivery checkout",
-      "Admin workflows for products, coupons, orders and operational analytics",
-    ],
-    stack: [
-      "React",
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "Drizzle ORM",
-      "TanStack Query",
-      "Zustand",
-      "Razorpay",
-    ],
-    repository: "https://github.com/Shreyas2121/pizza-store",
-    problem:
-      "Food ordering becomes difficult to model when products have optional add-ons, discounts depend on checkout state, delivery is limited by service area, and payments must stay aligned with order status. Administrators also need one place to operate the catalogue and incoming orders.",
-    solution:
-      "The platform connects a responsive customer storefront to a Node.js API and PostgreSQL database. Customers can configure products, manage a cart, apply coupons, validate delivery addresses and choose online payment or cash on delivery, while administrators operate products, orders and promotions.",
-    users: [
-      {
-        role: "Customers",
-        capabilities:
-          "Browse the menu, customise products, manage cart items, apply coupons, save delivery addresses and complete online or cash-on-delivery checkout.",
-      },
-      {
-        role: "Administrators",
-        capabilities:
-          "Manage products, customisation groups, coupons and orders, update fulfilment status and review revenue and order information.",
-      },
-    ],
-    architecture: [
-      {
-        layer: "Frontend",
-        details:
-          "Responsive React storefront and administration interface with separate server-state and client-state responsibilities.",
-        technologies: [
-          "React",
-          "Tailwind CSS",
-          "Mantine",
-          "TanStack Query",
-          "Zustand",
-        ],
-      },
-      {
-        layer: "Backend",
-        details:
-          "Express API covering catalogue, customisation, carts, coupons, customer addresses, delivery validation, orders and payment workflows.",
-        technologies: ["Node.js", "Express", "Zod", "REST APIs"],
-      },
-      {
-        layer: "Data and payments",
-        details:
-          "Relational product and ordering data with Razorpay integration for online checkout and support for cash-on-delivery orders.",
-        technologies: ["PostgreSQL", "Drizzle ORM", "Razorpay"],
-      },
-    ],
-    decisions: [
-      {
-        title: "Composable product customisation",
-        description:
-          "Add-on groups are modelled separately from base products so customers can build valid item configurations without duplicating catalogue entries.",
-      },
-      {
-        title: "Separate server and cart state",
-        description:
-          "TanStack Query manages API-backed data and cache invalidation, while Zustand handles immediate customer cart interactions.",
-      },
-      {
-        title: "Delivery-zone validation",
-        description:
-          "Checkout validates the customer address against supported pincodes before an order can be placed.",
-      },
-      {
-        title: "Multiple payment paths",
-        description:
-          "The order workflow supports both Razorpay checkout and cash on delivery while retaining a shared order-management model.",
-      },
-    ],
-    limitations: [
-      "The project does not currently provide a maintained public live demo.",
-      "Advanced delivery tracking and real-time customer notifications remain future improvements.",
-      "Administrative analytics can be expanded with deeper filtering and longer-term reporting.",
     ],
   },
 ];

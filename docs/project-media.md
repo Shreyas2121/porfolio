@@ -14,15 +14,21 @@ page: a linked cover and title, summary, highlighted outcome or capability, thre
 technology labels and a primary case-study action. Independent previews also
 offer separate demo and source links where available. Footers align within each
 grid row. The homepage features three projects; the complete index groups all
-seven into professional and independent work, with the lead professional case
-study given a larger preview. Its cover stacks above the text through tablet
-widths and sits alongside the text on desktop.
+seven into independent and professional work. PizzaStore leads the homepage and
+independent project index with a larger storefront preview. Covered featured
+cards stack their cover above the text through tablet widths and place it beside
+the text on desktop.
 
 ## Cover
 
-Use a representative screenshot or an explicitly labelled diagram. Current
-featured covers are illustrated overviews, not product screenshots.
-All seven projects currently have a cover. Professional visuals are explicitly
+Use a representative screenshot or an explicitly labelled diagram. PizzaStore
+uses an actual storefront screenshot as its cover and video poster, with ten
+screenshots and a 3:13 MP4 walkthrough in `public/projects/pizza-store/`.
+Its content and media records are maintained in `src/lib/pizza-store.ts`, and its
+URL remains `/projects/food-delivery-platform`. The supplied PNGs and MP4 are
+preserved without re-encoding; the approximately 180 MB video should be compressed
+and optimized for fast-start playback before deployment. No captions or transcript
+were supplied. All seven projects have covers. Professional visuals are explicitly
 labelled as reconstructed overviews; independent visuals describe their product
 workflows. Keep those labels when updating the diagrams, or replace them with
 an accurate caption when adding a real product screenshot.

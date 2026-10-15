@@ -41,6 +41,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     { id: "architecture", label: "Architecture" },
     { id: "decisions", label: "Engineering decisions" },
     { id: "technology", label: "Technology" },
+    ...(project.evidence?.length ? [{ id: "evidence", label: "Verification and evidence" }] : []),
     { id: "constraints", label: "Current limitations" },
   ];
 
@@ -97,6 +98,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <p className="mt-3 leading-7 text-secondary">{user.capabilities}</p>
             </article>)}
           </div>
+          {project.workflows?.length ? <div className="mt-10 max-w-[70ch] space-y-8">
+            {project.workflows.map(workflow => <article key={workflow.title}>
+              <h3 className="text-lg font-semibold">{workflow.title}</h3>
+              <p className="mt-3 leading-7 text-body">{workflow.description}</p>
+            </article>)}
+          </div> : null}
         </CaseStudySection>
         <CaseStudySection id="architecture" title="Architecture">
           <p className="text-secondary">Clear boundaries across the stack.</p>
@@ -120,6 +127,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <CaseStudySection id="technology" title="Technology">
           <ul className="flex flex-wrap gap-x-6 gap-y-3 text-body">{project.stack.map(item => <li key={item}>{item}</li>)}</ul>
         </CaseStudySection>
+        {project.evidence?.length ? <CaseStudySection id="evidence" title="Verification and evidence">
+          <div className="max-w-[70ch] space-y-8">
+            {project.evidence.map(item => <article key={item.title}>
+              <h3 className="text-lg font-semibold">{item.title}</h3>
+              <p className="mt-3 leading-7 text-body">{item.description}</p>
+              <a href={item.href} target="_blank" rel="noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-2 font-semibold text-accent">
+                {item.label}<ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </article>)}
+          </div>
+        </CaseStudySection> : null}
         <CaseStudySection id="constraints" title="Current limitations">
           <ul className="max-w-prose list-disc space-y-3 rounded-xl border border-line bg-surface py-6 pl-10 pr-6 text-secondary">
             {project.limitations.map(item => <li key={item} className="leading-7">{item}</li>)}
