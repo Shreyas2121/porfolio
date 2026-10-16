@@ -13,8 +13,8 @@ media sections collapse on the public site.
 page: a linked cover and title, summary, highlighted outcome or capability, three
 technology labels and a primary case-study action. Independent previews also
 offer separate demo and source links where available. Footers align within each
-grid row. The homepage features three projects; the complete index groups all
-seven into independent and professional work. PizzaStore leads the homepage and
+grid row. The homepage features four projects; the complete index groups all
+eight into independent and professional work. PizzaStore leads the homepage and
 independent project index with a larger storefront preview. Covered featured
 cards stack their cover above the text through tablet widths and place it beside
 the text on desktop.
@@ -23,12 +23,12 @@ the text on desktop.
 
 Use a representative screenshot or an explicitly labelled diagram. PizzaStore
 uses an actual storefront screenshot as its cover and video poster, with ten
-screenshots and a 3:13 MP4 walkthrough in `public/projects/pizza-store/`.
+screenshots in `public/projects/pizza-store/` and a 3:13 YouTube walkthrough.
 Its content and media records are maintained in `src/lib/pizza-store.ts`, and its
-URL remains `/projects/food-delivery-platform`. The supplied PNGs and MP4 are
-preserved without re-encoding; the approximately 180 MB video should be compressed
-and optimized for fast-start playback before deployment. No captions or transcript
-were supplied. All seven projects have covers. Professional visuals are explicitly
+URL remains `/projects/food-delivery-platform`. The supplied PNGs are
+preserved without re-encoding. The original MP4 is archived outside `public/` in
+the ignored `archived-media/` folder and is not deployed. Walkthroughs accept only
+YouTube video IDs; local video sources are not supported. Professional visuals are explicitly
 labelled as reconstructed overviews; independent visuals describe their product
 workflows. Keep those labels when updating the diagrams, or replace them with
 an accurate caption when adding a real product screenshot.
@@ -91,7 +91,7 @@ media: [
     id: "walkthrough",
     type: "video",
     section: "walkthrough",
-    src: "/projects/example/walkthrough.mp4",
+    youtubeId: "BlVTIPPrUW0", // the 11-character ID, not a URL or file path
     poster: "/projects/example/walkthrough-poster.webp",
     width: 1920,
     height: 1080,
@@ -99,11 +99,6 @@ media: [
     caption: "Import a source and inspect a cited answer.",
     duration: "0:45",
     steps: ["Import the source.", "Ask a question.", "Inspect its citations."],
-    captions: [{
-      src: "/projects/example/captions-en.vtt",
-      language: "en",
-      label: "English",
-    }],
     transcript: "/projects/example/transcript.txt",
   },
 ]
@@ -121,16 +116,21 @@ zoom controls remain available on short landscape screens. The legacy
 `expandedSrc` field remains supported for an alternate asset with the same ratio;
 prefer `expanded` when its dimensions or description differ.
 
-Videos load their player after Play is selected. Native controls retain mobile
-fullscreen playback. Duration, direct-video links and a written walkthrough remain
-available independently of playback. Add VTT captions for spoken narration and a
-transcript where appropriate. Failed images and videos preserve their frames and
-provide direct asset links.
-Loading feedback clears when native playback is ready. Cover failures preserve
-their dimensions too, while keeping the card's case-study link usable.
+Videos load a responsive YouTube privacy-enhanced iframe only after Play is
+selected. The preview uses a local screenshot; the player reserves a 16:9 frame
+with a minimum height of 200px and supports fullscreen. Focus moves to the iframe
+after activation. Duration, a Watch on YouTube link and optional written steps or
+transcript remain available independently of playback. Manage video captions in
+YouTube. The watch link also works when embeds are blocked or unavailable; the
+site does not claim to detect playback errors inside the cross-origin player.
+Cover failures preserve their dimensions while keeping the case-study link usable.
 
-Public records currently contain illustrated diagrams, not product screenshots
-or recorded demos. Add truthful screenshots and short recordings when available;
+Use `youtubeId` on every video record. `src` is forbidden by the media type and
+IDs are validated before embed URLs are built. `pnpm test:videos` rejects video
+files under `public/`; the same check runs before every production build.
+
+Public records include product screenshots, diagrams and a YouTube walkthrough.
+Add truthful screenshots and short recordings when available;
 do not publish test illustrations as product captures. The preserved development
 example is `docs/media-component-preview.tsx.example` and is not a public route.
 
@@ -147,7 +147,7 @@ Long overview and decision prose is constrained separately from the wider media
 column. Workflow columns adapt to the number of user groups, and limitations use
 a neutral supporting panel.
 
-The shared next-project navigation visits all seven projects in index order,
+The shared next-project navigation visits all eight projects in index order,
 including professional case studies, then wraps back to the first. Breadcrumb
 and footer links restore the index position remembered when opening a preview in
 the same tab. This position is kept in session storage for up to 30 minutes;
@@ -165,10 +165,11 @@ Browser-test compilation uses an isolated directory under `.next` and restores
 Next's temporary TypeScript include afterwards, keeping the production build
 separate from test compilation.
 
-The browser checks cover the complete index and all seven detail URLs, empty media
+The browser checks cover the complete index and all eight detail URLs, empty media
 sections, gallery selection, modal keyboard focus and restoration, Escape, zoom,
-video click-to-play and failure states, a generated playable WebM with real VTT
-caption loading, portrait dimensions, expanded diagram dimensions, figure order,
+YouTube click-to-load, embed URL, player title, focus, fullscreen permission and
+watch-link fallback with external YouTube requests blocked (not hosted playback),
+portrait dimensions, expanded diagram dimensions, figure order,
 gallery arrow keys and contained zoom/panning, desktop and mobile contents navigation,
 direct section URLs, section focus and active states, resume icon affordances,
 and reflow in both themes at 320, 390, 768 and 1440px, plus a short landscape viewer.

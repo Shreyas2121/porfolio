@@ -90,8 +90,7 @@ const media: ProjectMedia[] = [
   { ...visual, id: "workflow", type: "diagram", section: "workflows", caption: "Workflow figure fixture", explanation: "A workflow figure adjacent to its explanation." },
   { ...visual, id: "decision-later", type: "screenshot", section: "decisions", order: 2, caption: "Second decision fixture" },
   { ...visual, id: "decision-first", type: "screenshot", section: "decisions", order: 1, caption: "First decision fixture" },
-  { id: "playable", type: "video", section: "walkthrough", src: "/__media-check/clip.webm", poster: visual.src, width: 640, height: 360, title: "Playable fixture", caption: "Generated browser playback test; not a product demo.", duration: "0:01", steps: ["Watch the labelled playback fixture."], transcript: "/__media-check/transcript.txt", captions: [{ src: "/__media-check/captions.vtt", language: "en", label: "English" }] },
-  { id: "video", type: "video", section: "walkthrough", src: "/__missing-test-video.mp4", poster: visual.src, width: 960, height: 600, title: "Test walkthrough", caption: "Video fixture", duration: "0:45", steps: ["Inspect the source.", "Follow the cited answer."], transcript: "/projects/citeleaf-cover.svg", captions: [{ src: "/__missing-test-captions.vtt", language: "en", label: "English" }] }
+  { id: "video", type: "video", section: "walkthrough", youtubeId: "BlVTIPPrUW0", poster: visual.src, width: 960, height: 600, title: "Test walkthrough", caption: "YouTube embed fixture; playback is not tested against the external service.", duration: "0:45", steps: ["Inspect the source.", "Follow the cited answer."] }
 ];
 export default function Preview() { return <main id="main-content" tabIndex={-1} className="min-h-screen bg-page text-foreground"><h1>Media component checks</h1><ProjectMediaSection media={media} section="gallery" /><ProjectMediaSection media={media} section="walkthrough" /><section aria-label="Architecture"><ProjectMediaSection media={media} section="architecture" /></section><section aria-label="Workflow figures"><ProjectMediaSection media={media} section="workflows" /></section><section aria-label="Decision figures"><ProjectMediaSection media={media} section="decisions" /></section></main>; }
 `;
@@ -110,8 +109,6 @@ try {
   await mkdir(fixtureAssets);
   createdAssets = true;
   await writeFile(path.join(fixtureAssets, "mobile.svg"), '<svg xmlns="http://www.w3.org/2000/svg" width="390" height="844" viewBox="0 0 390 844"><rect width="390" height="844" fill="#f8fafc"/><text x="30" y="70" font-size="24" fill="#0f172a">Portrait test fixture</text><rect x="30" y="110" width="330" height="600" fill="#d1fae5"/><text x="30" y="800" font-size="24" fill="#0f172a">Bottom remains visible</text></svg>');
-  await writeFile(path.join(fixtureAssets, "transcript.txt"), "Generated playback fixture. This clip tests native playback, not a product workflow.");
-  await writeFile(path.join(fixtureAssets, "captions.vtt"), "WEBVTT\n\n00:00:00.000 --> 00:00:01.000\nLabelled playback fixture\n");
   await mkdir(scratchRoot, { recursive: true });
   scratch = await mkdtemp(path.join(scratchRoot, "portfolio-media-check-"));
   const port = await freePort();
@@ -186,24 +183,6 @@ try {
     });
     assert.deepEqual(audit, [], "Media fixture accessibility: " + JSON.stringify(audit));
   }
-  const videoBase64 = await evaluate(async () => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 640; canvas.height = 360;
-    const context = canvas.getContext("2d");
-    const paint = () => { context.fillStyle = "#0f172a"; context.fillRect(0, 0, 640, 360); context.fillStyle = "#6ee7b7"; context.font = "28px sans-serif"; context.fillText("Labelled playback fixture", 40, 180); };
-    paint();
-    const stream = canvas.captureStream(10);
-    const recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-    const chunks = [];
-    recorder.ondataavailable = event => chunks.push(event.data);
-    const stopped = new Promise(resolve => recorder.onstop = resolve);
-    recorder.start();
-    const timer = setInterval(paint, 50);
-    await new Promise(resolve => setTimeout(resolve, 500));
-    recorder.stop(); await stopped; clearInterval(timer); stream.getTracks().forEach(track => track.stop());
-    return btoa(String.fromCharCode(...new Uint8Array(await new Blob(chunks).arrayBuffer())));
-  });
-  await writeFile(path.join(fixtureAssets, "clip.webm"), Buffer.from(videoBase64, "base64"));
   assert.equal(await evaluate(() => document.querySelector('section[aria-label="Decision figures"] figcaption p').textContent), "First decision fixture", "Figures follow explicit order");
   assert.ok(await evaluate(() => !!document.querySelector('section[aria-label="Workflow figures"] figure')), "Workflow figures render beside their section");
   await evaluate('document.querySelector("button[aria-haspopup=dialog]").focus()');
@@ -240,19 +219,26 @@ try {
   await eventually(() => evaluate(() => document.querySelector('#gallery figcaption p').textContent === "Research screenshot fixture"), "Gallery Home key");
   await evaluate('Array.from(document.querySelectorAll("button")).find(button => button.textContent === "Next image").click()');
   await eventually(() => evaluate('document.querySelector("#gallery figcaption p").textContent === "Booking screenshot fixture"'), "gallery selection");
-  assert.equal(await evaluate('document.querySelector("button[aria-pressed=true]").getAttribute("aria-label")'), "Show screenshot 2: Booking screenshot fixture");
+  assert.equal(await evaluate('document.querySelector("#gallery button[aria-pressed=true]").getAttribute("aria-label")'), "Show screenshot 2: Booking screenshot fixture");
   await evaluate('Array.from(document.querySelectorAll("button")).find(button => button.textContent === "Next image").click()');
   await eventually(() => evaluate('document.querySelector("#gallery").textContent.includes("This visual could not be loaded.")'), "image failure fallback");
-  assert.equal(await evaluate('document.querySelector("video")'), null, "Video is not mounted before playback");
-  await click('button[aria-label="Play walkthrough · 0:45: Test walkthrough"]');
-  await eventually(() => evaluate('!!document.querySelector("video[controls][playsinline] track[kind=captions]")'), "native video controls and captions");
-  await eventually(() => evaluate('document.querySelector("#walkthrough [role=alert]")?.textContent.includes("could not be played")'), "video error fallback");
+  assert.equal(await evaluate('document.querySelector("video, #walkthrough iframe")'), null, "No player before playback");
+  await command("Network.setBlockedURLs", { urls: ["*youtube-nocookie.com*", "*youtube.com*"] });
+  await click('#walkthrough button');
+  await eventually(() => evaluate('!!document.querySelector("#walkthrough iframe")'), "YouTube embed mounted after Play");
+  const embed = await evaluate(() => {
+    const frame = document.querySelector("#walkthrough iframe");
+    const link = document.querySelector('#walkthrough a[href^="https://www.youtube.com/watch"]');
+    return { src: frame.src, title: frame.title, fullScreen: frame.allowFullscreen, referrer: frame.referrerPolicy, focused: document.activeElement === frame, watch: link.href, target: link.target, nativeVideo: !!document.querySelector("video") };
+  });
+  assert.equal(embed.src, "https://www.youtube-nocookie.com/embed/BlVTIPPrUW0?autoplay=1&playsinline=1&rel=0");
+  assert.equal(embed.title, "Test walkthrough — YouTube video");
+  assert.ok(embed.fullScreen && embed.focused);
+  assert.equal(embed.referrer, "strict-origin-when-cross-origin");
+  assert.equal(embed.watch, "https://www.youtube.com/watch?v=BlVTIPPrUW0");
+  assert.equal(embed.target, "_blank");
+  assert.equal(embed.nativeVideo, false);
   assert.ok(await evaluate('document.querySelector("#walkthrough").textContent.includes("Written walkthrough")'), "Written alternative remains available");
-  await click('button[aria-label="Play walkthrough · 0:01: Playable fixture"]');
-  await eventually(() => evaluate(() => document.querySelector('video[aria-label="Playable fixture"]')?.readyState >= 2), "Successful native video load");
-  assert.ok(await evaluate(() => document.querySelector('video[aria-label="Playable fixture"]').duration > 0), "Playable video has a real duration");
-  await eventually(() => evaluate(() => document.querySelector('video[aria-label="Playable fixture"] track').readyState === 2), "Captions load successfully");
-  assert.equal(await evaluate(() => document.querySelector('video[aria-label="Playable fixture"]').closest('figure').querySelector('[role="status"]')), null, "Video loading status clears");
   await command("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 1, mobile: false });
   await click('section[aria-label="Architecture"] button[aria-haspopup="dialog"]');
   await eventually(() => evaluate('!!document.querySelector("dialog[open]")'), "mobile diagram viewer");

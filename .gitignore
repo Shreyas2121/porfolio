@@ -20,6 +20,9 @@
 # production
 /build
 
+# Original recordings are kept outside public; walkthroughs use YouTube.
+/archived-media/
+
 # misc
 .DS_Store
 *.pem

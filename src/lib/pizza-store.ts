@@ -143,7 +143,7 @@ export const pizzaStore: IndependentProject = {
       id: "product-demo",
       type: "video",
       section: "walkthrough",
-      src: "/projects/pizza-store/walkthrough.mp4",
+      youtubeId: "BlVTIPPrUW0",
       poster: "/projects/pizza-store/storefront.png",
       width: 1914,
       height: 910,

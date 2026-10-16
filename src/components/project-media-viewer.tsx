@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { ArrowUpRight, Play } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import type { ProjectCover, ProjectDiagram, ProjectScreenshot, ProjectVideo } from "@/lib/constants";
+import { getYouTubeLinks } from "@/lib/youtube";
 
 const control = "inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-line px-4 py-2 text-sm font-semibold hover:bg-tint disabled:opacity-40";
 
@@ -155,34 +157,41 @@ export function ProjectDiagramFigure({ diagram }: { diagram: ProjectDiagram }) {
 
 export function ProjectWalkthrough({ video }: { video: ProjectVideo }) {
   const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const player = useRef<HTMLVideoElement>(null);
+  const player = useRef<HTMLIFrameElement>(null);
   const captionId = useId();
+  const links = getYouTubeLinks(video.youtubeId);
   useEffect(() => {
-    if (playing) void player.current?.play().catch(() => { /* Native controls remain available if playback requires another gesture. */ });
+    if (playing) player.current?.focus();
   }, [playing]);
 
   return <figure className="overflow-hidden rounded-2xl border border-line bg-surface">
-    <div className="relative bg-media" style={{ aspectRatio: `${video.width} / ${video.height}` }}>
-      {playing ? <video ref={player} controls playsInline preload="metadata" poster={video.poster} className="absolute inset-0 h-full w-full" aria-label={video.title} aria-describedby={captionId} onError={() => setFailed(true)} onLoadedData={() => setLoading(false)} onWaiting={() => setLoading(true)} onCanPlay={() => setLoading(false)}>
-        <source src={video.src} onError={() => setFailed(true)} />
-        {video.captions?.map((track, index) => <track key={track.src} kind="captions" src={track.src} srcLang={track.language} label={track.label} default={index === 0} />)}
-        Your browser cannot play this video. <a href={video.src}>Open the video directly</a>.
-      </video> : <>
-        <MediaImage image={{ src: video.poster, alt: `${video.title} video poster`, width: video.width, height: video.height, caption: video.caption }} sizes="(min-width: 1280px) 960px, (min-width: 1024px) calc(100vw - 320px), calc(100vw - 40px)" linkOnError={false} />
-        <button type="button" className="absolute inset-0 flex items-center justify-center" aria-label={`Play walkthrough · ${video.duration}: ${video.title}`} onClick={() => setPlaying(true)}>
-          <span className="rounded-full bg-page px-6 py-4 font-semibold text-foreground shadow-lg">Play walkthrough · {video.duration}</span>
+    <div className="relative aspect-video min-h-[200px] bg-slate-950">
+      {playing ? <iframe
+        ref={player}
+        src={links.embed}
+        title={`${video.title} — YouTube video`}
+        aria-describedby={captionId}
+        className="absolute inset-0 h-full w-full border-0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
+      /> : <>
+        <div className="absolute inset-0 flex items-center"><div className="w-full">
+          <MediaImage image={{ src: video.poster, alt: `${video.title} video poster`, width: video.width, height: video.height, caption: video.caption }} sizes="(min-width: 1280px) 960px, (min-width: 1024px) calc(100vw - 320px), calc(100vw - 40px)" linkOnError={false} />
+        </div></div>
+        <button type="button" className="absolute inset-0 flex items-center justify-center" onClick={() => setPlaying(true)}>
+          <span className="inline-flex items-center gap-3 rounded-full bg-page px-5 py-4 font-semibold text-foreground shadow-lg">
+            <Play className="h-5 w-5 shrink-0 fill-current text-accent" aria-hidden="true" />
+            <span>Play walkthrough<span className="mt-0.5 block text-xs font-normal text-secondary">YouTube · {video.duration}</span><span className="sr-only">: {video.title}</span></span>
+          </span>
         </button>
       </>}
     </div>
     <figcaption id={captionId} className="space-y-3 p-5">
       <h3 className="text-xl font-semibold">{video.title} <span className="text-sm font-normal text-secondary">({video.duration})</span></h3>
       <p className="leading-7 text-secondary">{video.caption}</p>
-      {playing && loading && !failed && <p role="status" className="text-sm text-secondary">Loading video…</p>}
-      {failed && <p role="alert" className="text-body">This video could not be played. Use the direct video link below.</p>}
       <div className="flex flex-wrap gap-5 text-sm">
-        <a href={video.src} className="inline-flex min-h-11 items-center text-accent underline">Open video directly</a>
+        <a href={links.watch} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center gap-2 font-semibold text-accent">Watch on YouTube<ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
         {video.transcript && <a href={video.transcript} className="inline-flex min-h-11 items-center text-accent underline">Read transcript</a>}
       </div>
       {video.steps.length > 0 && <div><h4 className="font-semibold">Written walkthrough</h4><ol className="mt-3 list-decimal space-y-2 pl-5 text-secondary">{video.steps.map(step => <li key={step} className="leading-7">{step}</li>)}</ol></div>}

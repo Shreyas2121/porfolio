@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/check-project-videos.mjs && next build",
     "start": "next start",
     "lint": "next lint",
     "test:media": "node scripts/check-project-media.mjs",
+    "test:videos": "node scripts/check-project-videos.mjs",
     "test:accessibility": "node scripts/check-accessibility.mjs"
   },
   "dependencies": {

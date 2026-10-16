@@ -32,7 +32,8 @@ export type ProjectVideo = {
   type: "video";
   section: "walkthrough";
   order?: number;
-  src: string;
+  youtubeId: string;
+  src?: never;
   poster: string;
   width: number;
   height: number;
@@ -40,7 +41,6 @@ export type ProjectVideo = {
   caption: string;
   duration: string;
   steps: string[];
-  captions?: { src: string; language: string; label: string }[];
   transcript?: string;
 };
 
