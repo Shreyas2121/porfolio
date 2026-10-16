@@ -4,7 +4,7 @@ import { ArrowDownRight, FileText, MapPin } from "lucide-react";
 import image from "../assests/image.avif";
 
 const signals = [
-  ["Nearly 4 years", "Product engineering"],
+  ["4+ years", "Product engineering"],
   ["Real time", "Data and WebSockets"],
   ["Full stack", "Data model to interface"],
 ];
@@ -27,7 +27,7 @@ export default function Hero() {
             </Link>
           </div>
           <p className="mt-5 max-w-2xl text-base leading-7 text-body sm:text-lg">
-            I&apos;m Shreyas, a full-stack developer with nearly four years of experience building B2B platforms and customer-facing products using TypeScript, React, NestJS, PostgreSQL and Redis.
+            I&apos;m Shreyas, a full-stack developer with 4+ years of experience building B2B platforms and customer-facing products. I own features from data modelling and API design through live interfaces, delivery and reliability improvements.
           </p>
           <dl className="mt-5 grid max-w-2xl grid-cols-3 gap-3 border-t border-line pt-4">
             {signals.map(([value, label]) => <div key={value}>

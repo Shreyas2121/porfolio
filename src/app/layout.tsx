@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Shreyas Rasaikar | Full-Stack Developer",
   description:
-    "Full-stack developer with nearly four years of experience building real-time B2B platforms using TypeScript, React, NestJS, PostgreSQL, Redis and WebSockets.",
+    "Full-stack developer with 4+ years of experience owning real-time B2B features from data modelling and API design to React interfaces, delivery and reliability improvements.",
   keywords: [
     "Shreyas Rasaikar",
     "Full-Stack Developer",
@@ -30,9 +30,13 @@ export default function RootLayout({
   const themeScript = `
     (function () {
       try {
-        var saved = localStorage.getItem("theme");
-        var dark = saved === "dark" ||
-          (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        var saved;
+        try { saved = localStorage.getItem("theme"); } catch (_) {}
+        var theme = ["light", "dark", "dopamine", "sand"].indexOf(saved) !== -1
+          ? saved
+          : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        var dark = theme === "dark";
+        document.documentElement.dataset.theme = theme;
         document.documentElement.classList.toggle("dark", dark);
         document.documentElement.style.colorScheme = dark ? "dark" : "light";
       } catch (_) {}

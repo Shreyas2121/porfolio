@@ -5,6 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const featuredWork = [
   independentProjects[0],
+  ...independentProjects.filter((project) => project.slug === "archboard"),
   ...caseStudies.slice(0, 1),
   ...independentProjects.filter((project) => project.slug === "citeleaf"),
 ];

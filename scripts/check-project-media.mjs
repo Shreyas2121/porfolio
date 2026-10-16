@@ -350,7 +350,7 @@ try {
       }
     }
   }
-  const slugs = ["unified-multi-sport-architecture", "real-time-table-tennis-integration", "resilient-external-data-services", "citeleaf", "staymate", "workforce-operations", "food-delivery-platform"];
+  const slugs = ["unified-multi-sport-architecture", "real-time-table-tennis-integration", "resilient-external-data-services", "prediction-market-trading-platform", "citeleaf", "staymate", "archboard", "food-delivery-platform"];
   const index = await (await fetch(origin + "/projects")).text();
   for (const slug of slugs) {
     assert.ok(index.includes('href="/projects/' + slug + '"'), "Index links to " + slug);
@@ -360,10 +360,10 @@ try {
     assert.ok(anchors.length > 0, "Contents exist for " + slug);
     for (const anchor of anchors) assert.ok(detailHtml.includes('id="' + anchor + '"'), "Contents destination exists: " + slug + "#" + anchor);
   }
-  const empty = await (await fetch(origin + "/projects/workforce-operations")).text();
+  const empty = await (await fetch(origin + "/projects/staymate")).text();
   assert.ok(!empty.includes('id="gallery"') && !empty.includes('id="walkthrough"'), "Missing media sections collapse");
   assert.equal((await fetch(origin + "/projects/unknown-project")).status, 404, "Unknown project returns 404");
-  console.log("Browser checks passed: all seven case studies, media controls, sticky contents, active sections, direct section URLs, mobile contents keyboard access and focus, resume icons, and both themes at 320/390/768/1440px.");
+  console.log("Browser checks passed: all eight case studies, media controls, sticky contents, active sections, direct section URLs, mobile contents keyboard access and focus, resume icons, and both themes at 320/390/768/1440px.");
 } catch (error) {
   console.error(error);
   if (inspectBrowser && socket?.readyState === WebSocket.OPEN) console.error(await inspectBrowser());

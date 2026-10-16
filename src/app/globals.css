@@ -18,8 +18,8 @@
   --color-on-action: var(--on-action);
   --color-media: #f8fafc;
   --color-media-ink: #334155;
-  --color-contact: #6ee7b7;
-  --color-contact-ink: #020617;
+  --color-contact: var(--contact);
+  --color-contact-ink: var(--contact-ink);
 }
 
 :root {
@@ -40,6 +40,9 @@
   --grid-line: rgba(15, 23, 42, 0.055);
   --scroll-track: #e2e8f0;
   --scroll-thumb: #94a3b8;
+  --contact: #6ee7b7;
+  --contact-ink: #020617;
+  --glow: rgba(16, 185, 129, 0.06);
 }
 
 :root.dark {
@@ -60,6 +63,52 @@
   --grid-line: rgba(255, 255, 255, 0.025);
   --scroll-track: #020617;
   --scroll-thumb: #334155;
+}
+
+:root[data-theme="dopamine"] {
+  color-scheme: light;
+  --page: #ede5ff;
+  --text: #291344;
+  --body-text: #493263;
+  --secondary-text: #634c7d;
+  --surface: #faf5ff;
+  --subtle: #e5d8fb;
+  --tint: #dcc9fa;
+  --tint-strong: #c7acee;
+  --line: #bd9fdf;
+  --action: #6d28d9;
+  --on-action: #ffffff;
+  --accent: #7022bf;
+  --focus-ring: #7022bf;
+  --grid-line: rgba(109, 40, 217, 0.09);
+  --scroll-track: #ede5ff;
+  --scroll-thumb: #a27bcf;
+  --contact: #c5f542;
+  --contact-ink: #291344;
+  --glow: rgba(201, 72, 229, 0.18);
+}
+
+:root[data-theme="sand"] {
+  color-scheme: light;
+  --page: #f6f0e4;
+  --text: #342b23;
+  --body-text: #54473a;
+  --secondary-text: #6d5e4d;
+  --surface: #fffbf2;
+  --subtle: #eee5d5;
+  --tint: #e6d9c3;
+  --tint-strong: #d9c7a9;
+  --line: #cbb99b;
+  --action: #9c432b;
+  --on-action: #fffbf2;
+  --accent: #8c3c27;
+  --focus-ring: #9c432b;
+  --grid-line: rgba(103, 79, 47, 0.065);
+  --scroll-track: #f6f0e4;
+  --scroll-thumb: #b6a17e;
+  --contact: #dce2be;
+  --contact-ink: #342b23;
+  --glow: rgba(184, 117, 57, 0.12);
 }
 
 * {
@@ -102,8 +151,8 @@ body {
 }
 
 ::selection {
-  background: #6ee7b7;
-  color: #020617;
+  background: var(--contact);
+  color: var(--contact-ink);
 }
 
 a,
@@ -130,7 +179,7 @@ summary:focus-visible {
 
 .grid-glow {
   background-image:
-    radial-gradient(circle at 18% 48%, rgba(16, 185, 129, 0.06), transparent 30%),
+    radial-gradient(circle at 18% 48%, var(--glow), transparent 30%),
     linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: auto, 64px 64px, 64px 64px;

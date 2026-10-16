@@ -8,7 +8,7 @@ export default function Experience() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <p className="eyebrow">Experience</p>
         <h2 className="mt-4 max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">
-          Four years of learning by shipping.
+          4+ years of building and owning product features.
         </h2>
         <div className="mt-8 border-t border-line">
           {experiences.map((experience, index) => (

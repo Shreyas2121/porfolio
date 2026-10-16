@@ -18,6 +18,7 @@ export const pizzaStore: IndependentProject = {
     "Zustand", "React Hook Form", "Zod", "Socket.IO", "JWT", "Razorpay Test Mode", "Vitest", "PGlite",
   ],
   repository: "https://github.com/Shreyas2121/pizza-store",
+  demo: "https://pizza-store-delta-brown.vercel.app/",
   cover: {
     src: "/projects/pizza-store/storefront.png",
     alt: "PizzaStore customer storefront with its pizza hero, menu navigation, delivery pincode and ordering actions.",
@@ -26,6 +27,18 @@ export const pizzaStore: IndependentProject = {
     caption: "Customer storefront · actual application screenshot",
   },
   media: [
+    {
+      id: "data-model",
+      type: "diagram",
+      section: "architecture",
+      src: "/projects/pizza-store/data-model.png",
+      alt: "PizzaStore data model connecting users and store memberships to stores, products, store products, orders and order items, with related payment attempts, refunds, promotions, promotion applications and journal entries.",
+      width: 4854,
+      height: 1263,
+      caption: "Core data relationships across store operations, ordering, payments, promotions and accounting. Created with Archboard.",
+      explanation:
+        "Stores connect staff memberships, store-specific products and fulfillment. Orders preserve item snapshots and link to payment attempts, refunds and promotion applications, while journal entries record financial events. This is a focused overview of selected entities and relationships, rather than the complete database schema. Open the full-size diagram to inspect the labels and cardinalities.",
+    },
     {
       id: "storefront",
       type: "screenshot",
@@ -292,10 +305,10 @@ export const pizzaStore: IndependentProject = {
   ],
   limitations: [
     "An INR portfolio application for company-operated stores. Tax, receipts and payroll are demonstration policies; statutory filing and invoice services are outside its scope. Standard product cost is a reporting proxy rather than recipe-level inventory valuation.",
-    "Financial posting, payment reconciliation and reservation expiry require an operator or external scheduler. The HTTP server does not schedule these commands automatically.",
-    "Uploads, private receipts, simulator state and Socket.IO delivery depend on the serving process. Multiple API instances would require shared storage and realtime coordination; production invitation delivery needs an adapter.",
+    "Optional maintenance timers handle financial posting, payment reconciliation and reservation expiry while the API is awake. They pause when the free hosting service sleeps, so the demo does not provide an always-running recovery schedule.",
+    "The deployment uses Cloudinary for new images and private receipts, with existing public images bundled at their original paths. Simulator state and Socket.IO delivery remain process-local; multiple API instances would require shared realtime coordination, and production invitation delivery needs an adapter.",
     "Realtime notifications are best-effort, with known audience-context gaps in some payment-finalization paths. Clients must read authoritative state through the API.",
     "Full PostgreSQL contention tests, complete migration-chain execution, hosted browser/provider checks and measured report-performance benchmarks remain separate verification work. The inventory explorer is a teaching model.",
-    "Prepared payment and settlement history is seeded evidence. Fresh orders are needed for simulator or provider demonstrations; no maintained public live demo URL is supplied here.",
+    "Prepared payment and settlement history is seeded evidence. Use fresh orders for simulator or provider demonstrations. The free-hosted API may take time to wake on the first request.",
   ],
 };

@@ -1,4 +1,5 @@
 import { pizzaStore } from "@/lib/pizza-store";
+import { archboard } from "@/lib/archboard";
 
 export type ProjectCover = {
   src: string;
@@ -130,13 +131,13 @@ export const caseStudies: CaseStudy[] = [
       explanation: "A sport-type discriminator preserves sport-specific behaviour within shared entities for events, participants, scores, markets and odds. NestJS services and React interfaces reuse that common structure. This is a reconstructed overview based on the case study, rather than an internal system diagram.",
     }],
     summary:
-      "A shared platform for managing events, participants, scores, markets and odds across seven-plus combat sports.",
+      "A shared data model and application architecture that replaced separate combat-sport implementations and made new sports easier to onboard.",
     role:
-      "Owned the PostgreSQL and TypeORM data model, unified NestJS APIs and shared React interfaces using a sport-type discriminator.",
+      "Owned the consolidation across PostgreSQL schemas, TypeORM entities, NestJS APIs and React interfaces. Introduced sport-scoped shared entities, extended the model for team-based competition, and removed legacy schemas and application references after migration. Applied the same consolidation approach to the High Limit Racing migration into shared motorsports infrastructure.",
     challenge:
-      "Replace separate sport schemas and duplicated frontend and backend implementations without losing sport-specific behaviour.",
+      "Each sport had its own schema, endpoints and interface code, making routine changes repetitive and onboarding expensive. The shared design needed to preserve sport-specific scoring and market behaviour, accommodate team participation and migrate existing data without leaving competing implementations behind.",
     outcome:
-      "Reduced duplicated code by approximately 80% and shortened new-sport onboarding from weeks to days.",
+      "Reduced duplicated code by approximately 80% across seven-plus combat sports and shortened new-sport onboarding from weeks to days. Extended the platform for team-based competition and completed legacy-schema cleanup, reducing the number of implementations the team needed to maintain.",
     stack: ["TypeScript", "NestJS", "React", "PostgreSQL", "TypeORM"],
     accent: "violet",
     icon: "architecture",
@@ -153,13 +154,13 @@ export const caseStudies: CaseStudy[] = [
     title: "Real-time table tennis integration",
     context: "Octalogic Tech - End-to-end integration",
     summary:
-      "A complete Major League Table Tennis data pipeline from paginated provider APIs to live trading workflows.",
+      "An end-to-end Major League Table Tennis integration connecting external schedules and point-level scores to trading, settlement and sportsbook delivery.",
     role:
-      "Built API ingestion, transactional schedule and score synchronisation, selection settlement, publishing flows and the WebSocket-powered React interface.",
+      "Owned the integration from provider API clients and relational modelling through transactional synchronization, round-level markets, selection settlement and the React trading interface. Continued ownership after launch with event-loading improvements, point-level statistics, faster live-data delivery and downstream market-mapping fixes.",
     challenge:
-      "Model a multi-round match format while keeping live scores, line-ups, odds and downstream publishing consistent.",
+      "Represent singles, doubles and golden-game rounds while keeping lineups, game scores, market periods and settlement consistent. Repeated provider polling needed to preserve related records transactionally, avoid unnecessary writes and publish the correct round and participant information downstream.",
     outcome:
-      "Delivered a complete near-real-time workflow that traders can operate from schedule ingestion through live settlement.",
+      "Delivered a connected workflow from schedule ingestion to live trading and settlement. Added score-diff checks to skip unchanged writes, expanded point-level data coverage and resolved post-launch loading and sportsbook-mapping issues.",
     stack: ["NestJS", "React", "PostgreSQL", "Socket.IO", "Zustand", "Axios"],
     accent: "emerald",
     icon: "realtime",
@@ -176,16 +177,32 @@ export const caseStudies: CaseStudy[] = [
     title: "Resilient external data services",
     context: "Octalogic Tech - Reliability engineering",
     summary:
-      "Authentication, caching and recovery patterns for rate-limited or temporarily unavailable external sports-data providers.",
+      "Provider integration and recovery patterns that reduce repeated authentication, reject invalid odds and keep downstream sports data current.",
     role:
-      "Implemented OAuth 2.0 token management with memory and Redis caching, concurrency control, pre-expiry refresh and rate-aware retries; also built heartbeat-triggered resynchronisation.",
+      "Designed the lacrosse API authentication layer with in-memory and Redis token caching, shared in-flight authentication and rate-aware retries. Built configuration-driven odds validation, heartbeat-triggered downstream resynchronization and change detection that skips unchanged sportsbook updates.",
     challenge:
-      "Prevent duplicate authentication, race conditions and stale downstream state during concurrent requests and provider failures.",
+      "Concurrent requests could duplicate authentication, model odds could reference missing or inactive entities, and downstream outages could leave consumers stale. Recovery needed to respect provider limits, distinguish authentication failures from transient errors and avoid sending unchanged data on every sync cycle.",
     outcome:
-      "Reduced authentication requests by approximately 95% and automated recovery paths that previously required manual intervention.",
-    stack: ["OAuth 2.0", "Redis", "NestJS", "Cron", "Axios", "PostgreSQL"],
+      "Reduced unnecessary authentication requests by approximately 95%. Added configurable validation across 14+ sports, automated downstream resynchronization after heartbeat recovery and reduced redundant sportsbook pushes through state-change detection.",
+    stack: ["OAuth 2.0", "Redis", "NestJS", "Cron", "Axios", "PostgreSQL", "AWS SQS"],
     accent: "amber",
     icon: "reliability",
+  },
+  {
+    slug: "prediction-market-trading-platform",
+    title: "Live prediction-market intelligence",
+    context: "Octalogic Tech - Full-stack product ownership",
+    summary:
+      "A Polymarket integration that gives traders live executions, market activity, outcome-exposure estimates and price-level breakdowns alongside internal odds.",
+    role:
+      "Owned the integration from API exploration and database design to the trade poller, in-memory aggregation, Redis recovery snapshots and authenticated Socket.IO gateway. Built the React trade ticker, markets board and interactive price ladders, then added automated market discovery, settlement synchronization and provider-failure handling.",
+    challenge:
+      "Turn inconsistent external metadata and frequent trade updates into a useful trading view without writing every aggregate change to PostgreSQL. The integration also needed to match external markets to internal events conservatively, respect manual deactivations, recover running totals after restarts and stop tracking completed markets.",
+    outcome:
+      "Delivered a two-second polling pipeline with deduplication, in-memory volume and outcome-exposure calculations, Redis snapshots and room-scoped price-ladder subscriptions. Automated matching uses name-confidence thresholds and date checks; virtualized, bounded ticker rows keep client state controlled. Added rate-limit backoff, settlement-driven cache eviction and focused tests for aggregation, discovery, API serialization and lifecycle behaviour.",
+    stack: ["TypeScript", "NestJS", "React", "PostgreSQL", "TypeORM", "Redis", "Socket.IO", "Material UI", "Jest"],
+    accent: "emerald",
+    icon: "realtime",
   },
 ];
 
@@ -196,44 +213,52 @@ export const experiences: Experience[] = [
     location: "Panaji, Goa",
     period: "May 2025 - Present",
     summary:
-      "Building real-time B2B sports-data and odds products with ownership across data modelling, external integrations, backend services and operational interfaces.",
+      "Own full-stack features for a B2B sports-data and trading platform, from shared data models and provider integrations to live trader interfaces and downstream publishing. Carry work through design, implementation and post-launch reliability improvements across combat sports, motorsports and prediction markets.",
     achievements: [
-      "Architected a shared PostgreSQL and TypeORM model for 7+ combat sports, reducing duplicated code by approximately 80%.",
-      "Built the Major League Table Tennis integration end to end, including data ingestion, transactional live-score sync, settlement, publishing and a WebSocket-powered trading UI.",
-      "Implemented OAuth 2.0 token management with in-memory and Redis caching, concurrency control and rate-aware retries, reducing authentication requests by approximately 95%.",
-      "Optimised a real-time Formula 1 trading grid for 20+ drivers and 5+ market types using Zustand, Socket.IO, memoisation and granular rendering.",
+      "Consolidated 7+ combat sports into shared PostgreSQL schemas, NestJS APIs and React interfaces, reducing duplicated code by approximately 80% and new-sport onboarding from weeks to days. Delivered the High Limit Racing migration into shared motorsports infrastructure and removed retired schemas and code paths.",
+      "Built the Polymarket integration end to end: a two-second trade poller, in-memory volume and outcome-exposure aggregation, Redis recovery snapshots, authenticated Socket.IO feeds and React trading screens with a virtualized ticker and interactive price ladders.",
+      "Automated prediction-market discovery using conservative name matching and date checks, while preserving manual deactivations. Hardened polling and settlement with deduplication, rate-limit backoff, cache eviction and focused regression tests.",
+      "Owned the Major League Table Tennis integration from external APIs and transactional score synchronization to round-level settlement, sportsbook publishing and the React trading interface. Continued delivery with point-level statistics, loading improvements and downstream market-mapping fixes.",
+      "Reduced unnecessary provider authentication calls by approximately 95% through in-memory and Redis caching with shared in-flight requests. Built configurable odds validation across 14+ sports, heartbeat-based recovery and change detection to avoid redundant downstream pushes.",
+      "Extended shared sports models for team-based competition and built configurable combat-sports auto-publishing. Collaborated with the frontend lead on the F1 trading grid, using granular Socket.IO updates and Zustand state to handle 20+ drivers across multiple live markets.",
     ],
     selectedWork: [
       {
         title: "Shared combat-sports architecture",
         slug: "unified-multi-sport-architecture",
         description:
-          "Consolidated seven-plus sports into shared PostgreSQL schemas, TypeORM entities, NestJS services and React interfaces using a sport-type discriminator.",
+          "Replaced separate sport implementations with shared entities, APIs and interfaces, then extended the model for team participation and completed legacy-schema cleanup.",
+      },
+      {
+        title: "Polymarket trading intelligence",
+        slug: "prediction-market-trading-platform",
+        description:
+          "Delivered the external-data pipeline, live aggregation, automated market matching and trader-facing ticker, markets board and price ladders as one full-stack feature.",
       },
       {
         title: "Major League Table Tennis",
         slug: "real-time-table-tennis-integration",
         description:
-          "Owned the integration from paginated external APIs and transactional synchronisation through live scores, settlement, publishing and the trader-facing interface.",
+          "Connected schedules, lineups and game scores to trading and settlement, with continued ownership of performance, point-level data and sportsbook compatibility after launch.",
       },
       {
         title: "External API reliability",
         slug: "resilient-external-data-services",
         description:
-          "Designed memory and Redis token caching, concurrency control, pre-expiry refresh and rate-aware retry behaviour for OAuth-protected providers.",
+          "Designed cache-backed authentication and recovery paths that handle concurrency, provider limits and downstream failures without relying on manual intervention.",
       },
       {
-        title: "Data quality and recovery",
+        title: "Data quality and publishing automation",
         description:
-          "Built configuration-driven odds validation and heartbeat-triggered resynchronisation to prevent invalid data and recover from downstream outages.",
+          "Built database-configured validation for model odds and per-sport, per-tour auto-publishing, connecting accepted data to existing sportsbook delivery and live trader status updates.",
       },
       {
-        title: "Real-time trading performance",
+        title: "Live trading interfaces",
         description:
-          "Collaborated on an F1 trading grid with granular Socket.IO updates and Zustand stores to keep dense, frequently changing market data responsive.",
+          "Collaborated on the F1 trading frontend with the frontend lead. Current work includes the curling Day Board redesign; per-match save queues, acknowledged writes and offline edit buffering remain ongoing work.",
       },
     ],
-    stack: ["TypeScript", "NestJS", "React", "PostgreSQL", "Redis", "TypeORM", "WebSockets"],
+    stack: ["TypeScript", "NestJS", "React", "PostgreSQL", "Redis", "TypeORM", "Socket.IO", "Zustand", "AWS SQS", "Jest"],
   },
   {
     title: "Full Stack Developer",
@@ -340,6 +365,7 @@ export const skillGroups = [
 
 export const independentProjects: IndependentProject[] = [
   pizzaStore,
+  archboard,
   {
     slug: "citeleaf",
     media: [{
@@ -556,96 +582,6 @@ export const independentProjects: IndependentProject[] = [
       "Stripe operates in test mode and the project does not claim production payment traffic.",
       "Development environments currently use TypeORM schema synchronisation; production evolution should use migrations.",
       "Automated coverage should be expanded around payment authorization, booking conflicts and webhook replay scenarios.",
-    ],
-  },
-  {
-    slug: "workforce-operations",
-    cover: {
-      src: "/projects/workforce-cover.svg",
-      alt: "Organisation-scoped shifts pass team, capacity, overlap, availability and leave checks before assignment, with an audit history of operational changes.",
-      width: 960,
-      height: 600,
-      caption: "Scheduling rules · illustrated overview",
-    },
-    title: "Workforce Operations",
-    context: "Multi-tenant scheduling platform",
-    description:
-      "An organisation-scoped workforce system for staff, teams, shifts, recurring availability, time-off approvals and auditable operational changes.",
-    highlights: [
-      "Admin, manager and worker permissions with tenant-scoped data",
-      "Assignment rules for capacity, overlap, availability and approved leave",
-      "Audit history and guarded demo bootstrap tooling",
-    ],
-    stack: ["NestJS", "React", "PostgreSQL", "TypeORM", "TanStack Start", "TanStack Query"],
-    repository: "https://github.com/Shreyas2121/operations-manage",
-    demo: "https://operations-manage.vercel.app/",
-    problem:
-      "Shift-based organisations need more than a calendar: schedules must respect team boundaries, worker availability, approved leave, role permissions, capacity and overlapping assignments while keeping operational changes traceable.",
-    solution:
-      "Workforce Operations is a tenant-scoped scheduling platform where administrators configure organisations and teams, managers operate team schedules, and workers manage availability and time-off requests. Business constraints are enforced by the API rather than left to the interface.",
-    users: [
-      {
-        role: "Administrators",
-        capabilities:
-          "Create teams and staff, assign users to teams and inspect organisation-wide operations and audit history.",
-      },
-      {
-        role: "Managers",
-        capabilities:
-          "Manage workers in their team, create shifts, assign or remove workers and review time-off requests.",
-      },
-      {
-        role: "Workers",
-        capabilities:
-          "View assigned shifts, maintain recurring availability and submit or track time-off requests.",
-      },
-    ],
-    architecture: [
-      {
-        layer: "Frontend",
-        details:
-          "Server-rendered React application with route-level role surfaces, shared data components and a startup gate for a sleeping API.",
-        technologies: ["React 19", "TanStack Start", "TanStack Router", "TanStack Query", "Tailwind CSS"],
-      },
-      {
-        layer: "Backend",
-        details:
-          "Organisation-aware NestJS modules for authentication, users, teams, shifts, availability, leave and audit logging.",
-        technologies: ["NestJS", "TypeScript", "JWT", "Role guards", "Swagger"],
-      },
-      {
-        layer: "Data and deployment",
-        details:
-          "Relational organisation and scheduling model deployed as independently hosted frontend and API services.",
-        technologies: ["PostgreSQL", "TypeORM", "Neon", "Render", "Vercel"],
-      },
-    ],
-    decisions: [
-      {
-        title: "Server-enforced scheduling rules",
-        description:
-          "Assignment checks cover team membership, worker role, duplicates, capacity, overlap, availability and approved leave before state changes are accepted.",
-      },
-      {
-        title: "Organisation-scoped access",
-        description:
-          "Tenant context and role guards constrain data access so users operate only within their organisation and permitted team scope.",
-      },
-      {
-        title: "Auditable operations",
-        description:
-          "Important administrative and scheduling changes create audit records for operational visibility.",
-      },
-      {
-        title: "Protected demo bootstrap",
-        description:
-          "Fresh deployments can create controlled demonstration data through explicitly enabled, key-protected setup tools.",
-      },
-    ],
-    limitations: [
-      "Shift swaps and real-time schedule updates are not currently implemented.",
-      "Optimistic concurrency and idempotent write handling remain future reliability improvements.",
-      "Production schema evolution should replace development-time TypeORM synchronisation with migrations.",
     ],
   },
 ];

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 const careerSignals = [
-  { value: "Nearly 4 years", label: "Professional experience" },
+  { value: "4+ years", label: "Professional experience" },
   { value: "4 companies", label: "Product environments" },
   { value: "Full stack", label: "Data model to interface" },
 ];
